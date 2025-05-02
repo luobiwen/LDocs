@@ -40,6 +40,10 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 }
 ```
 
+## 📑 项目文档
+
+paper:
+
 ## 🛠️ 安装指南
 
 ### 依赖项
