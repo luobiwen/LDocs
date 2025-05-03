@@ -79,8 +79,6 @@ graph TD
    - [ ] WebAssembly加速文档渲染
    - [ ] 离线模式支持
 
-> 💡 项目已获得GitHub官方API支持，即将上线GitHub Marketplace！
-```
 
 ## 🤝 贡献指南
 欢迎通过以下方式参与共建：
@@ -88,6 +86,8 @@ graph TD
 git clone https://github.com/LDocs
 npm install && npm run dev
 ```
+
+> 💡 项目已获得GitHub官方API支持，即将上线GitHub Marketplace！
 
 **让我们共同打造开发者文档新范式！** 🚀🚀🚀
 
