@@ -75,13 +75,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 65,
+				"line" : 67,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 48,
+				"line" : 50,
 				"parent" : 0
 			},
 			{
@@ -366,18 +366,19 @@
 				1,
 				2,
 				7,
-				10
+				9,
+				12
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"id" : "mainw_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "mainw_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "mainw_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "mainw::@6890427a1f51a3e7e1df",
@@ -491,7 +492,8 @@
 				1,
 				2,
 				7,
-				10
+				9,
+				12
 			]
 		},
 		{
@@ -500,7 +502,8 @@
 			[
 				3,
 				6,
-				8
+				8,
+				10
 			]
 		},
 		{
@@ -521,15 +524,15 @@
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				9
+				11
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				11,
-				12
+				13,
+				14
 			]
 		}
 	],
@@ -578,6 +581,17 @@
 			"backtrace" : 4,
 			"compileGroupIndex" : 0,
 			"path" : "myFileManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "myDSManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "myDSManager.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

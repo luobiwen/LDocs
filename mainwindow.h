@@ -5,6 +5,7 @@
 #include<QToolButton>
 #include<QPropertyAnimation>
 #include"myFileManager.h"
+#include"myDSManager.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -62,5 +63,6 @@ private:
     QPoint m_StartPoint;
     QPropertyAnimation *scaleAnim;
     myFileManager* filemanager;
+    myDSManager*dsmanager;
 };
 #endif // MAINWINDOW_H
