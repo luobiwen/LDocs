@@ -2779,7 +2779,7 @@ border:none;</string>
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="listWidget">
+      <widget class="QTreeWidget" name="treeWidget">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -2801,6 +2801,11 @@ border:none;</string>
        <property name="styleSheet">
         <string notr="true">border:none;</string>
        </property>
+       <column>
+        <property name="text">
+         <string notr="true">1</string>
+        </property>
+       </column>
       </widget>
      </item>
      <item>
@@ -2984,8 +2989,8 @@ border:none;</string>
       <rect>
        <x>15</x>
        <y>15</y>
-       <width>54</width>
-       <height>54</height>
+       <width>52</width>
+       <height>52</height>
       </rect>
      </property>
      <property name="sizePolicy">
