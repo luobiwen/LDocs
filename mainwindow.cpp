@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     setIconColor(ui->toolButton_103,QColor(255, 255, 255));
     setIconColor(ui->toolButton_132,QColor(255, 255, 255));
     filemanager = new myFileManager;
+    dsmanager=new myDSManager;
 }
 //设置图片动画
 void MainWindow::setimagecartoon(QToolButton* button){

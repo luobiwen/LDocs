@@ -339,6 +339,12 @@
 			null
 		],
 		[
+			"C:/Users/1/Desktop/LDocs/myDSManager.h",
+			"MU",
+			"EWIEGA46WW/moc_myDSManager.cpp",
+			null
+		],
+		[
 			"C:/Users/1/Desktop/LDocs/myFileManager.h",
 			"MU",
 			"EWIEGA46WW/moc_myFileManager.cpp",
@@ -418,6 +424,7 @@
 	[
 		[ "C:/Users/1/Desktop/LDocs/main.cpp", "MU", null ],
 		[ "C:/Users/1/Desktop/LDocs/mainwindow.cpp", "MU", null ],
+		[ "C:/Users/1/Desktop/LDocs/myDSManager.cpp", "MU", null ],
 		[ "C:/Users/1/Desktop/LDocs/myFileManager.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
