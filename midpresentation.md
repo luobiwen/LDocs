@@ -4,7 +4,7 @@
 
 `LDocs` 是一个面向信息技术工作者的 **全平台智能文档协同工具**，已实现桌面端/Web端/安卓端三端联动，支持从需求分析到API文档的全生命周期管理。项目通过AI辅助生成+多端同步功能，降低开发者70%的文档处理时间。
 
-![系统架构图](https://via.placeholder.com/600x200?text=Multi-Platform+Architecture+Diagram)
+![系统架构图](https://github.com/luobiwen/LDocs/blob/main/image/4.png)
 
 ## ✨ 已完成核心功能
 
