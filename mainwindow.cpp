@@ -4,6 +4,7 @@
 #include<QMouseEvent>
 #include<QPropertyAnimation>
 #include<QGraphicsColorizeEffect>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -26,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     setIconColor(ui->toolButton_102,QColor(255, 255, 255));
     setIconColor(ui->toolButton_103,QColor(255, 255, 255));
     setIconColor(ui->toolButton_132,QColor(255, 255, 255));
+    filemanager = new myFileManager;
 }
 //设置图片动画
 void MainWindow::setimagecartoon(QToolButton* button){
@@ -138,9 +140,13 @@ void MainWindow::on_toolButton_132_clicked()
 
 void MainWindow::on_toolButton_3_pressed()
 {
-    QString filename=QFileDialog::getOpenFileName(this,"请选择一个文件","","TXT(*.txt)");
+    //QString filename=QFileDialog::getOpenFileName(this,"请选择一个文件","");
+    //QUrl filename=QFileDialog::getOpenFileUrl(this,"请选择一个文件夹");
+    QString filename="C:\\Users\\1\\Desktop\\TugeDocs\\mainw";
+    QTreeWidgetItem * rootitem=new QTreeWidgetItem();
     if(filename.isEmpty())return;
-    else ui->stackedWidget->setCurrentWidget(ui->html);
+    //else ui->stackedWidget->setCurrentWidget(ui->html);
+    else filemanager->FiletoList(filename,rootitem);
 }
 
 //标题鼠标事件

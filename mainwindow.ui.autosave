@@ -1,0 +1,3156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(77, 82, 147);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>70</y>
+      <width>81</width>
+      <height>631</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QToolButton" name="toolButton_12">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>-1</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    border: none;
+    background-color: rgb(77, 82, 147);  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+font:bold 16px;		/*设置按钮文字和大小*/
+border-top-left-radius:20px;
+border-bottom-left-radius:20px;
+}
+
+QToolButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+       </property>
+       <property name="text">
+        <string>开始</string>
+       </property>
+       <property name="icon">
+        <iconset theme="QIcon::ThemeIcon::GoHome"/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::ToolButtonPopupMode::DelayedPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>-1</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    border: none;
+    background-color: rgb(77, 82, 147);  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+font:bold 16px;		/*设置按钮文字和大小*/
+border-top-left-radius:20px;
+border-bottom-left-radius:20px;
+}
+
+QToolButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+       </property>
+       <property name="text">
+        <string>工程文档</string>
+       </property>
+       <property name="icon">
+        <iconset theme="accessories-dictionary"/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::ToolButtonPopupMode::DelayedPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_101">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>-1</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    border: none;
+    background-color: rgb(77, 82, 147);  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+font:bold 16px;		/*设置按钮文字和大小*/
+border-top-left-radius:20px;
+border-bottom-left-radius:20px;
+}
+
+QToolButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+       </property>
+       <property name="text">
+        <string>Issue</string>
+       </property>
+       <property name="icon">
+        <iconset theme="QIcon::ThemeIcon::DocumentPageSetup"/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_102">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>-1</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    border: none;
+    background-color: rgb(77, 82, 147);  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+font:bold 16px;		/*设置按钮文字和大小*/
+border-top-left-radius:20px;
+border-bottom-left-radius:20px;
+}
+
+QToolButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+       </property>
+       <property name="text">
+        <string>API文档</string>
+       </property>
+       <property name="icon">
+        <iconset theme="QIcon::ThemeIcon::DocumentSend"/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_103">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>-1</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    border: none;
+    background-color: rgb(77, 82, 147);  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+font:bold 16px;		/*设置按钮文字和大小*/
+border-top-left-radius:20px;
+border-bottom-left-radius:20px;
+}
+
+QToolButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+       </property>
+       <property name="text">
+        <string>项目日程</string>
+       </property>
+       <property name="icon">
+        <iconset theme="QIcon::ThemeIcon::WeatherClear"/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_132">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>-1</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    border: none;
+    background-color: rgb(77, 82, 147);  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+font:bold 16px;		/*设置按钮文字和大小*/
+border-top-left-radius:20px;
+border-bottom-left-radius:20px;
+}
+
+QToolButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+       </property>
+       <property name="text">
+        <string>用户指南</string>
+       </property>
+       <property name="icon">
+        <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_104">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>-1</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    border: none;
+    background-color: rgb(77, 82, 147);  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+font:bold 16px;		/*设置按钮文字和大小*/
+border-top-left-radius:10px;
+border-bottom-left-radius:10px;
+}
+
+QToolButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+       </property>
+       <property name="text">
+        <string>？</string>
+       </property>
+       <property name="icon">
+        <iconset theme="help-about"/>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonStyle::ToolButtonTextOnly</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_105">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>黑体</family>
+         <pointsize>-1</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    border: none;
+    background-color: rgb(77, 82, 147);  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+font:bold 16px;		/*设置按钮文字和大小*/
+border-top-left-radius:10px;
+border-bottom-left-radius:10px;
+}
+
+QToolButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+       </property>
+       <property name="text">
+        <string>了解更多</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>50</y>
+      <width>911</width>
+      <height>651</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="start">
+     <widget class="QWidget" name="widget_5" native="true">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>30</y>
+        <width>161</width>
+        <height>143</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QToolButton" name="toolButton_107">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>新页面</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::FolderNew"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_108">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+
+}</string>
+         </property>
+         <property name="text">
+          <string>导入</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_109">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>以PDF格式导出</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_110">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+color: rgb(0, 100, 255);}</string>
+         </property>
+         <property name="text">
+          <string>...更多</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="Line" name="line_2">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>30</y>
+        <width>20</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>570</y>
+        <width>911</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;📖TugeDocs是一款由中山大学luobiwen同学🤓自主研发的结合大模型开源智能文档生成助手📖&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:8pt; font-style:italic;&quot;&gt;⚠️本项目仅供个人升学求职和交流使用&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget_4" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>741</width>
+        <height>571</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">* { margin: 0px; padding: 0px; spacing: 0px; }
+QSpacerItem {
+    width: 0px;
+    height: 0px;
+}</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>30</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widget_7" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="minimumSize">
+             <size>
+              <width>709</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>709</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+  border: none;
+    margin: 0px;
+    padding: 0px;
+}</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:22pt; font-weight:700;&quot;&gt;双击开始&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="textEdit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>700</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>700</width>
+              <height>1000</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">* { margin: 0px; padding: 0px; spacing: 0px;border:none; }</string>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;双击此处输入文本...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="maximumSize">
+          <size>
+           <width>709</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;或者你想从此处开始...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_6" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>709</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>709</width>
+           <height>300</height>
+          </size>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="toolButton_7">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>230</width>
+              <height>270</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>230</width>
+              <height>270</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QToolButton {
+    border: none;
+background-image:url(:/image/1.png) ;
+background-position: center;
+    color: white;               /* 文字颜色 */
+    padding: 0px;
+font:bold 30px;		/*设置按钮文字和大小*/
+border-radius:0px;
+    margin: 0px;
+background-position: center;
+    background-size: cover;
+}
+</string>
+            </property>
+            <property name="text">
+             <string>快速开始</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>270</width>
+              <height>268</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>230</width>
+              <height>270</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>230</width>
+              <height>270</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QToolButton {
+    border: none;
+background-image: url(:/image/2.png);
+background-position: center;
+/* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+font:bold 30px;		/*设置按钮文字和大小*/
+border-radius:10px;
+}
+
+</string>
+            </property>
+            <property name="text">
+             <string>新手教学</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_8">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>230</width>
+              <height>270</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>230</width>
+              <height>270</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QToolButton {
+    border: none;  /* 背景色 */
+background-image: url(:/image/3.png);
+background-position: center;
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+font:bold 30px;		/*设置按钮文字和大小*/
+border-radius:10px;
+}
+</string>
+            </property>
+            <property name="text">
+             <string>导入模板</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="maximumSize">
+          <size>
+           <width>709</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;你也可以...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_38" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>709</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>709</width>
+           <height>50</height>
+          </size>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_14">
+          <property name="leftMargin">
+           <number>5</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>30</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="toolButton_106">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>696</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>696</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>黑体</family>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QToolButton { 
+border: 2px solid rgb(0, 170, 255);
+	color: rgb(0, 170, 255);
+text-align : left; 
+border-radius:15px;
+}
+QToolButton:hover {
+    color:white;
+	background-color: rgb(0, 170, 255);
+}
+
+QToolButton:pressed {
+ color:white;
+background-color: rgb(0, 170, 255);
+}</string>
+            </property>
+            <property name="text">
+             <string>  导入</string>
+            </property>
+            <property name="icon">
+             <iconset theme="QIcon::ThemeIcon::ObjectRotateLeft"/>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <zorder>label</zorder>
+     <zorder>widget_5</zorder>
+     <zorder>widget_4</zorder>
+     <zorder>line_2</zorder>
+    </widget>
+    <widget class="QWidget" name="readme">
+     <widget class="QWidget" name="widget_11" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>741</width>
+        <height>701</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>30</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="minimumSize">
+          <size>
+           <width>709</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>10000</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+  border: none;
+    margin: 0px;
+    padding: 0px;
+}</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:22pt; font-weight:700;&quot;&gt;欢迎来到我的项目的工程文档&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_21" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTextEdit" name="textEdit_6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border:none;</string>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;输入项目内容，大模型自动生成README...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_4">
+            <property name="styleSheet">
+             <string notr="true">QToolButton {
+    border: none;
+    background-color: #4CAF50;  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+}
+
+QToolButton:hover {
+    background-color: #45a049;  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+    background-color: #3d8b40;  /* 按下状态 */
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line_12">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_5">
+         <property name="styleSheet">
+          <string notr="true">border:none;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="Line" name="line_4">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>30</y>
+        <width>20</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget_12" native="true">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>30</y>
+        <width>161</width>
+        <height>143</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <widget class="QToolButton" name="toolButton_111">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>新页面</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::FolderNew"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_112">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+
+}</string>
+         </property>
+         <property name="text">
+          <string>导入</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_113">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>导出README</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_114">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+color: rgb(0, 100, 255);}</string>
+         </property>
+         <property name="text">
+          <string>...更多</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="html">
+     <widget class="QWidget" name="widget_20" native="true">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>30</y>
+        <width>151</width>
+        <height>143</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_16">
+       <property name="leftMargin">
+        <number>11</number>
+       </property>
+       <item>
+        <widget class="QToolButton" name="toolButton_128">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>新页面</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::FolderNew"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_129">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+
+}</string>
+         </property>
+         <property name="text">
+          <string>导入</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_130">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>以PDF格式导出</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_131">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+color: rgb(0, 100, 255);}</string>
+         </property>
+         <property name="text">
+          <string>...更多</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="Line" name="line_7">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>30</y>
+        <width>20</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget_22" native="true">
+      <property name="geometry">
+       <rect>
+        <x>-10</x>
+        <y>0</y>
+        <width>751</width>
+        <height>701</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_17">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>30</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_15">
+         <property name="minimumSize">
+          <size>
+           <width>709</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>10000</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+  border: none;
+    margin: 0px;
+    padding: 0px;
+}</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:22pt; font-weight:700;&quot;&gt;双击开始&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_23" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTextEdit" name="textEdit_7">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border:none;</string>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;输入Html文档内容，大模型自动生成文档...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_5">
+            <property name="styleSheet">
+             <string notr="true">QToolButton {
+    border: none;
+    background-color: #4CAF50;  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+}
+
+QToolButton:hover {
+    background-color: #45a049;  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+    background-color: #3d8b40;  /* 按下状态 */
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_8">
+         <property name="styleSheet">
+          <string notr="true">border:none;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="issue">
+     <widget class="Line" name="line_11">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>30</y>
+        <width>20</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget_37" native="true">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>30</y>
+        <width>161</width>
+        <height>143</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_29">
+       <item>
+        <widget class="QToolButton" name="toolButton_153">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>新页面</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::FolderNew"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_154">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+
+}</string>
+         </property>
+         <property name="text">
+          <string>导入</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_155">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>导出README</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_156">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+color: rgb(0, 100, 255);}</string>
+         </property>
+         <property name="text">
+          <string>...更多</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="widget_35" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>741</width>
+        <height>701</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_28">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>30</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_21">
+         <property name="minimumSize">
+          <size>
+           <width>709</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>10000</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+  border: none;
+    margin: 0px;
+    padding: 0px;
+}</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:22pt; font-weight:700;&quot;&gt;欢迎来到我的项目的Issue讨论&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_36" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTextEdit" name="textEdit_19">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;输入项目内容，大模型自动生成README...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_11">
+            <property name="styleSheet">
+             <string notr="true">QToolButton {
+    border: none;
+    background-color: #4CAF50;  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+}
+
+QToolButton:hover {
+    background-color: #45a049;  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+    background-color: #3d8b40;  /* 按下状态 */
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_20"/>
+       </item>
+      </layout>
+     </widget>
+     <zorder>widget_37</zorder>
+     <zorder>widget_35</zorder>
+     <zorder>line_11</zorder>
+    </widget>
+    <widget class="QWidget" name="api">
+     <widget class="Line" name="line_8">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>30</y>
+        <width>20</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget_27" native="true">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>30</y>
+        <width>161</width>
+        <height>143</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_23">
+       <item>
+        <widget class="QToolButton" name="toolButton_141">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>新页面</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::FolderNew"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_142">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+
+}</string>
+         </property>
+         <property name="text">
+          <string>导入</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_143">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>导出README</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_144">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+color: rgb(0, 100, 255);}</string>
+         </property>
+         <property name="text">
+          <string>...更多</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="widget_24" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>741</width>
+        <height>701</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_22">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>30</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_18">
+         <property name="minimumSize">
+          <size>
+           <width>709</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>10000</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+  border: none;
+    margin: 0px;
+    padding: 0px;
+}</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:22pt; font-weight:700;&quot;&gt;欢迎来到我的项目的API文档&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_26" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTextEdit" name="textEdit_13">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;输入项目内容，大模型自动生成README...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_8">
+            <property name="styleSheet">
+             <string notr="true">QToolButton {
+    border: none;
+    background-color: #4CAF50;  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+}
+
+QToolButton:hover {
+    background-color: #45a049;  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+    background-color: #3d8b40;  /* 按下状态 */
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_14"/>
+       </item>
+      </layout>
+     </widget>
+     <zorder>widget_27</zorder>
+     <zorder>widget_24</zorder>
+     <zorder>line_8</zorder>
+    </widget>
+    <widget class="QWidget" name="date">
+     <widget class="QWidget" name="widget_29" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>741</width>
+        <height>701</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_24">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>30</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_19">
+         <property name="minimumSize">
+          <size>
+           <width>709</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>10000</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+  border: none;
+    margin: 0px;
+    padding: 0px;
+}</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:22pt; font-weight:700;&quot;&gt;欢迎来到我的项目的日程安排&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_30" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTextEdit" name="textEdit_15">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;输入项目内容，大模型自动生成README...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_9">
+            <property name="styleSheet">
+             <string notr="true">QToolButton {
+    border: none;
+    background-color: #4CAF50;  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+}
+
+QToolButton:hover {
+    background-color: #45a049;  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+    background-color: #3d8b40;  /* 按下状态 */
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_16"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="widget_31" native="true">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>30</y>
+        <width>161</width>
+        <height>143</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_25">
+       <item>
+        <widget class="QToolButton" name="toolButton_145">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>新页面</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::FolderNew"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_146">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+
+}</string>
+         </property>
+         <property name="text">
+          <string>导入</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_147">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>导出README</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_148">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+color: rgb(0, 100, 255);}</string>
+         </property>
+         <property name="text">
+          <string>...更多</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="Line" name="line_9">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>30</y>
+        <width>20</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="help">
+     <widget class="Line" name="line_10">
+      <property name="geometry">
+       <rect>
+        <x>730</x>
+        <y>30</y>
+        <width>20</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget_34" native="true">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>30</y>
+        <width>161</width>
+        <height>143</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_27">
+       <item>
+        <widget class="QToolButton" name="toolButton_149">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>新页面</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::FolderNew"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_150">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+
+}</string>
+         </property>
+         <property name="text">
+          <string>导入</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_151">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+	color: rgb(0, 100, 255);
+}</string>
+         </property>
+         <property name="text">
+          <string>导出README</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_152">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}
+
+QToolButton:hover {
+	color: rgb(0, 100, 255);
+}
+
+QToolButton:pressed {
+color: rgb(0, 100, 255);}</string>
+         </property>
+         <property name="text">
+          <string>...更多</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="widget_32" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>741</width>
+        <height>701</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_26">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>30</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_20">
+         <property name="minimumSize">
+          <size>
+           <width>709</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>10000</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+  border: none;
+    margin: 0px;
+    padding: 0px;
+}</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:22pt; font-weight:700;&quot;&gt;欢迎来到我的项目的用户指南&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_33" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTextEdit" name="textEdit_17">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;输入项目内容，大模型自动生成README...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_10">
+            <property name="styleSheet">
+             <string notr="true">QToolButton {
+    border: none;
+    background-color: #4CAF50;  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 4px;
+}
+
+QToolButton:hover {
+    background-color: #45a049;  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+    background-color: #3d8b40;  /* 按下状态 */
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_18"/>
+       </item>
+      </layout>
+     </widget>
+     <zorder>widget_34</zorder>
+     <zorder>widget_32</zorder>
+     <zorder>line_10</zorder>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="widget_3" native="true">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>50</y>
+      <width>222</width>
+      <height>651</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>222</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>222</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(240, 240, 240);
+border-radius:10px;   </string>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QWidget" name="widget_2" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>211</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>211</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
+        <item>
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+border:none;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolButton_157">
+          <property name="styleSheet">
+           <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::EditFind"/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTreeWidget" name="treeWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>211</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>211</width>
+         <height>700</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:none;</string>
+       </property>
+       <column>
+        <property name="text">
+         <string notr="true">1</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QWidget" name="widget_9" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>211</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>211</width>
+         <height>40</height>
+        </size>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>新建</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolButton_2">
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::ListAdd"/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QWidget" name="widget_8" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>211</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>211</width>
+         <height>40</height>
+        </size>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>打开</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolButton_3">
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QToolButton {
+    border: none;
+    padding: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::FolderNew"/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="widget_10" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>15</y>
+       <width>52</width>
+       <height>52</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>52</width>
+       <height>52</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>黑体</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QPushButton{
+border:1px solid  rgb(77, 82, 147);  ;   /*边框的粗细，颜色*/
+border-radius:25px;    /*设置圆角半径 */
+padding:0px 0px;  /*QFrame边框与内部其它部件的距离*/
+ background-color: rgb(77, 82, 147);  	/*背景颜色*/
+color:white;		/*字体颜色*/
+min-width:50px;	/*设置最小宽度*/
+min-height:50px;	/*设置最小高度*/
+font:bold 18px;		/*设置按钮文字和大小*/
+}
+QPushButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QPushButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+     </property>
+     <property name="text">
+      <string>头像</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="widget_39" native="true">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>0</y>
+      <width>1121</width>
+      <height>47</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_15">
+     <property name="topMargin">
+      <number>4</number>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>1002</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_14">
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    border: none;
+    background-color: rgb(77, 82, 147);  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 2px;
+font:bold 35px;		/*设置按钮文字和大小*/
+border-radius:10px;
+}
+QToolButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+       </property>
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_15">
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+    border: none;
+    background-color: rgb(77, 82, 147);  /* 背景色 */
+    color: white;               /* 文字颜色 */
+    padding: 2px;
+font:bold 35px;		/*设置按钮文字和大小*/
+border-radius:10px;
+}
+QToolButton:hover {
+    background-color: rgb(0, 0, 127);  /* 悬停状态 */
+}
+
+QToolButton:pressed {
+   background-color: rgb(0, 0, 127);   /* 按下状态 */
+}</string>
+       </property>
+       <property name="text">
+        <string>×</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <zorder>widget</zorder>
+   <zorder>widget_3</zorder>
+   <zorder>widget_10</zorder>
+   <zorder>stackedWidget</zorder>
+   <zorder>widget_39</zorder>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

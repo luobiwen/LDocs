@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include<QToolButton>
 #include<QPropertyAnimation>
+#include"myFileManager.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -60,6 +61,6 @@ private:
     bool m_leftMousePressed;
     QPoint m_StartPoint;
     QPropertyAnimation *scaleAnim;
-
+    myFileManager* filemanager;
 };
 #endif // MAINWINDOW_H
