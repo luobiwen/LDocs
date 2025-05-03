@@ -4,7 +4,10 @@
 
 - **[罗碧文](https://github.com/luobiwen)** - 项目创建者 & 维护者  
 
-  📧 邮箱：luobw@mail2.sysu.edu.cn  
+  💻 中山大学软件工程2022级22331061
+
+  📧 邮箱：luobw@mail2.sysu.edu.cn
+    
   🔗 个人网站：https://github.com/luobiwen
 
 ## 🚀 项目概览
@@ -76,8 +79,6 @@ graph TD
    - [ ] WebAssembly加速文档渲染
    - [ ] 离线模式支持
 
-> 💡 项目已获得GitHub官方API支持，即将上线GitHub Marketplace！
-```
 
 ## 🤝 贡献指南
 欢迎通过以下方式参与共建：
@@ -85,6 +86,8 @@ graph TD
 git clone https://github.com/LDocs
 npm install && npm run dev
 ```
+
+> 💡 项目已获得GitHub官方API支持，即将上线GitHub Marketplace！
 
 **让我们共同打造开发者文档新范式！** 🚀🚀🚀
 
