@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include"myFileManager.h"
+#include"myDSManager.h"
 #include<QFileDialog>
 #include<QMouseEvent>
 #include<QPropertyAnimation>
@@ -29,6 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
     setIconColor(ui->toolButton_132,QColor(255, 255, 255));
     filemanager = new myFileManager;
     dsmanager=new myDSManager;
+    ui->treeWidget->setHeaderHidden(true);  // 隐藏表头
+    curfile="";
 }
 //设置图片动画
 void MainWindow::setimagecartoon(QToolButton* button){
@@ -59,7 +63,7 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event) {
     if(watched == ui->toolButton_12||watched == ui->toolButton_132||watched == ui->toolButton_101||watched == ui->toolButton_102||watched == ui->toolButton_103||watched == ui->toolButton_105||watched == ui->toolButton){
         filterButtonIconColor(qobject_cast<QToolButton*>(watched),QColor(0, 100, 255),QColor(255, 255, 255),event);
     }
-    if(watched == ui->toolButton_106){
+    if(watched == ui->toolButton_106){//106第一次press了之后背景颜色不能变回来
         filterButtonIconColor(qobject_cast<QToolButton*>(watched),QColor(Qt::white),QColor(0, 170, 255),event);
     }
     if(watched == ui->toolButton_7||watched == ui->toolButton_8||watched == ui->toolButton_6){
@@ -144,10 +148,12 @@ void MainWindow::on_toolButton_3_pressed()
     //QString filename=QFileDialog::getOpenFileName(this,"请选择一个文件","");
     //QUrl filename=QFileDialog::getOpenFileUrl(this,"请选择一个文件夹");
     QString filename="C:\\Users\\1\\Desktop\\TugeDocs\\mainw";
-    QTreeWidgetItem * rootitem=new QTreeWidgetItem();
+    QTreeWidgetItem * rootitem=new QTreeWidgetItem(QStringList()<<"mainw");
+    ui->treeWidget->addTopLevelItem(rootitem);
     if(filename.isEmpty())return;
     //else ui->stackedWidget->setCurrentWidget(ui->html);
     else filemanager->FiletoList(filename,rootitem);
+    return;
 }
 
 //标题鼠标事件
@@ -204,22 +210,44 @@ void MainWindow::on_toolButton_15_pressed()
 
 void MainWindow::on_toolButton_106_pressed()
 {
-    QString filename=QFileDialog::getOpenFileName(this,"请选择一个文件","","TXT(*.txt)");
-    if(filename.isEmpty())return;
-    else ui->stackedWidget->setCurrentWidget(ui->html);
+    curfile=QFileDialog::getOpenFileName(this,"请选择一个文件","","TXT(*.txt)");
+    if(curfile.isEmpty())return;
+    else {
+        ui->stackedWidget->setCurrentWidget(ui->html);
+        filemanager->LoadFile(curfile,ui->textEdit_8);
+        QFileInfo fileinfo(curfile);
+        ui->lineEdit_2->setText(fileinfo.fileName());
+    }
 }
 
 
 void MainWindow::on_toolButton_108_pressed()
 {
-    QString filename=QFileDialog::getOpenFileName(this,"请选择一个文件","","TXT(*.txt)");
-    if(filename.isEmpty())return;
-    else ui->stackedWidget->setCurrentWidget(ui->html);
+    on_toolButton_106_pressed();
 }
-
 
 void MainWindow::on_toolButton_7_pressed()
 {
     ui->stackedWidget->setCurrentWidget(ui->html);
+}
+
+
+void MainWindow::on_toolButton_2_pressed()
+{
+    QTreeWidgetItem * newitem=new QTreeWidgetItem(QStringList()<<"new");
+    newitem->setFlags(newitem->flags() | Qt::ItemIsEditable);
+    ui->treeWidget->addTopLevelItem(newitem);
+}
+
+
+void MainWindow::on_textEdit_8_textChanged()
+{
+    filemanager->EditFile(curfile,ui->textEdit_8);
+}
+
+
+void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)
+{
+    filemanager->EditFileName(curfile,ui->lineEdit_2);
 }
 
