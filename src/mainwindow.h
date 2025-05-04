@@ -57,6 +57,12 @@ private slots:
     void on_toolButton_7_pressed();
     void setimagecartoon(QToolButton* button);
 
+    void on_toolButton_2_pressed();
+
+    void on_textEdit_8_textChanged();
+
+    void on_lineEdit_2_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     bool m_leftMousePressed;
@@ -64,5 +70,6 @@ private:
     QPropertyAnimation *scaleAnim;
     myFileManager* filemanager;
     myDSManager*dsmanager;
+    QString curfile;
 };
 #endif // MAINWINDOW_H
