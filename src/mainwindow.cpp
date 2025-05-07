@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
     dsmanager=new myDSManager;
     ui->treeWidget->setHeaderHidden(true);  // 隐藏表头
     curfile="";
+    dsmanager->sendRequest("");
 }
 //设置图片动画
 void MainWindow::setimagecartoon(QToolButton* button){
