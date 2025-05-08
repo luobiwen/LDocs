@@ -19,8 +19,6 @@ public:
 private slots:
     void handleResponse(QNetworkReply *reply);
 private:
-    const QString apiUrl = "https://api.deepseek.com/v1/chat/completions";
-    const QString apiKey = "sk-184cd9c0dba04ab78723743e89c01cb6";
     QJsonObject requestBody;
     QNetworkAccessManager *manager;
 };
