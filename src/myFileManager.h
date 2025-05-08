@@ -5,10 +5,14 @@
 #include<QFile>
 #include<QTextEdit>
 #include<QLineEdit>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
 class myFileManager{
 public:
+    QJsonObject loadConfig(const QString &path);
     QFileInfoList FiletoList(QString,QTreeWidgetItem*);
-    void WriteFile(QString);
+    void NewFile(QString,QString);
     void LoadFile(QString,QTextEdit*);
     void EditFile(QString,QTextEdit*);
     void EditFileName(QString,QLineEdit*);

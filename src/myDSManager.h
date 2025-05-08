@@ -8,6 +8,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include<qconfig.h>
+#include"myFileManager.h"
 class myDSManager: public QObject{
 public:
     explicit myDSManager(QObject *parent = nullptr) : QObject(parent) {

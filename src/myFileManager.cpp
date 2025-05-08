@@ -20,7 +20,12 @@ QFileInfoList myFileManager::FiletoList(QString dicpath,QTreeWidgetItem* rootite
     }
     return file_list;
 }
-void myFileManager::WriteFile(QString filepath){}
+
+void myFileManager::NewFile(QString filepath,QString filename){
+    QString fullpath = filepath + "/" + filename;
+    QFile file(fullpath);
+}
+
 void myFileManager::LoadFile(QString filepath,QTextEdit* textedit){
     if(filepath.isEmpty())return;
     QFile file(filepath);
@@ -32,6 +37,7 @@ void myFileManager::LoadFile(QString filepath,QTextEdit* textedit){
     else textedit->setPlainText("无法打开文件");
     return;
 }
+
 void myFileManager::EditFile(QString filepath,QTextEdit* textedit){
     QFile file(filepath);
     if (file.open(QIODevice::ReadOnly|QIODevice::WriteOnly | QIODevice::Text)) {
@@ -41,9 +47,19 @@ void myFileManager::EditFile(QString filepath,QTextEdit* textedit){
     }
     else textedit->setPlainText("无法编辑文件");
 }
-void myFileManager::EditFileName(QString filepath,QLineEdit*lineedit){//名字有点问题
+
+void myFileManager::EditFileName(QString filepath,QLineEdit* lineedit){
+    QString newfilename = lineedit->text();
     QFile file(filepath);
-    QFileInfo fileInfo(file);
-    QString path = fileInfo.dir().absolutePath();
-    file.rename(path+"/"+lineedit->text());
+    QFileInfo fileinfo(file);
+    QString filedirpath=fileinfo.absolutePath();
+    file.rename(filedirpath+"/"+newfilename);
 }
+
+QJsonObject myFileManager::loadConfig(const QString &path) {
+    QFile file(path);
+    QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+    return doc.object();
+}
+//使用案例QJsonObject config = loadConfig(":/config.json");
+//QString encryptedToken = config["encrypted_token"].toString();

@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->treeWidget->setHeaderHidden(true);  // 隐藏表头
     curfile="";
     dsmanager->sendRequest("");
+    ui->lineEdit_2->setReadOnly(true);
 }
 //设置图片动画
 void MainWindow::setimagecartoon(QToolButton* button){
