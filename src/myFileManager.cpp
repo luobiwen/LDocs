@@ -2,27 +2,51 @@
 
 QFileInfoList myFileManager::FiletoList(QString dicpath,QTreeWidgetItem* rootitem){
     QDir dir(dicpath);
+    QDir dir_file(dicpath);    
+    dir_file.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);        
+    dir_file.setSorting(QDir::Size | QDir::Reversed);
+    QFileInfoList list_file = dir_file.entryInfoList();
+    foreach (QFileInfo var, list_file) {
+        QString name2=var.fileName();
+        QTreeWidgetItem* child = new QTreeWidgetItem(QStringList()<<name2);
+        child->setCheckState(1, Qt::Checked);
+        child->setText(0,name2);
+        root->addChild(child);
+    }
     QFileInfoList file_list=dir.entryInfoList(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-    foreach (QFileInfo var, file_list) {
-        if(var.isDir()){
-            QTreeWidgetItem* child=new QTreeWidgetItem(QStringList()<<var.fileName());
-            rootitem->addChild(child);
-            qDebug()<<var.fileName();
-            QFileInfoList child_file_list = FiletoList(var.absoluteFilePath(),child);
-            file_list.append(child_file_list);
-            file_list.append(var);
-        }
-        else if(var.isFile()){
-            QTreeWidgetItem *childitem=new QTreeWidgetItem(QStringList() <<var.fileName());
-            rootitem->addChild(childitem);
-            qDebug()<<var.fileName();
-        }
+    QFileInfoList folder_list = dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);  
+    foreach(QFileInfo var,folder_list){
+        QString namepath = var.absoluteFilePath();   
+        QFileInfo folderinfo= var;
+        QString name=folderinfo.fileName();      //获取目录名
+        QTreeWidgetItem* childroot = new QTreeWidgetItem(QStringList()<<name);
+        childroot->setCheckState(1, Qt::Checked);
+        childroot->setText(0,name);
+        root->addChild(childroot);              
+        QFileInfoList child_file_list = FiletoList(namepath,childroot);          //进行递归
+        file_list.append(child_file_list);
+        file_list.append(name);
     }
     return file_list;
 }
 
+//获取list节点路径
+QString myFileManager::getFileName(QTreeWidgetItem *pItem, QString currentrootpath)
+{
+    QTreeWidgetItem *pHeadItem = topLevelItem(0);
+    QString file_path;
+    file_path = pItem->text(0);
+    QTreeWidgetItem* pParentItem = pItem->parent();
+    while (pParentItem!=nullptr && pParentItem!=pHeadItem) {
+        file_path = pParentItem->text(0) + "\\" + file_path;
+        pParentItem = pParentItem->parent();
+    }
+    file_path = currentrootpath + "\\" + file_path;
+    return file_path;
+}
+
 void myFileManager::NewFile(QString filepath,QString filename){
-    QString fullpath = filepath + "/" + filename;
+    QString fullPath = filepath + "/" + filename;
     QFile file(fullpath);
 }
 
@@ -48,17 +72,16 @@ void myFileManager::EditFile(QString filepath,QTextEdit* textedit){
     else textedit->setPlainText("无法编辑文件");
 }
 
-void myFileManager::EditFileName(QString filepath,QLineEdit* lineedit){
-    QString newfilename = lineedit->text();
+void myFileManager::EditFileName(QString filepath,QLineEdit*lineedit){
     QFile file(filepath);
-    QFileInfo fileinfo(file);
-    QString filedirpath=fileinfo.absolutePath();
-    file.rename(filedirpath+"/"+newfilename);
+    QFileInfo fileInfo(file);
+    QString path = fileInfo.dir().absolutePath();
+    file.rename(filepath);
 }
 
 QJsonObject myFileManager::loadConfig(const QString &path) {
     QFile file(path);
-    QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+    QJsonDocument doc = QJsonDocument::fromJson(file.readAll());    
     return doc.object();
 }
 //使用案例QJsonObject config = loadConfig(":/config.json");
