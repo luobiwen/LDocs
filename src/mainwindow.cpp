@@ -253,3 +253,9 @@ void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)
     filemanager->EditFileName(curfile,ui->lineEdit_2);
 }
 
+
+void MainWindow::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
+{//还有点问题 显示的是相对目录不是根目录 但基本完成
+    QString a=myFileManager().getFileName(item,curfile);
+}
+
