@@ -63,6 +63,8 @@ private slots:
 
     void on_lineEdit_2_textChanged(const QString &arg1);
 
+    void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
+
 private:
     Ui::MainWindow *ui;
     bool m_leftMousePressed;

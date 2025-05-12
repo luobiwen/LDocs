@@ -11,7 +11,7 @@ QFileInfoList myFileManager::FiletoList(QString dicpath,QTreeWidgetItem* rootite
         QTreeWidgetItem* child = new QTreeWidgetItem(QStringList()<<name2);
         child->setCheckState(1, Qt::Checked);
         child->setText(0,name2);
-        root->addChild(child);
+        rootitem->addChild(child);
     }
     QFileInfoList file_list=dir.entryInfoList(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     QFileInfoList folder_list = dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);  
@@ -22,10 +22,10 @@ QFileInfoList myFileManager::FiletoList(QString dicpath,QTreeWidgetItem* rootite
         QTreeWidgetItem* childroot = new QTreeWidgetItem(QStringList()<<name);
         childroot->setCheckState(1, Qt::Checked);
         childroot->setText(0,name);
-        root->addChild(childroot);              
+        rootitem->addChild(childroot);
         QFileInfoList child_file_list = FiletoList(namepath,childroot);          //进行递归
         file_list.append(child_file_list);
-        file_list.append(name);
+        file_list.append(var);
     }
     return file_list;
 }
@@ -33,7 +33,7 @@ QFileInfoList myFileManager::FiletoList(QString dicpath,QTreeWidgetItem* rootite
 //获取list节点路径
 QString myFileManager::getFileName(QTreeWidgetItem *pItem, QString currentrootpath)
 {
-    QTreeWidgetItem *pHeadItem = topLevelItem(0);
+    QTreeWidgetItem *pHeadItem = pItem;
     QString file_path;
     file_path = pItem->text(0);
     QTreeWidgetItem* pParentItem = pItem->parent();
@@ -47,7 +47,7 @@ QString myFileManager::getFileName(QTreeWidgetItem *pItem, QString currentrootpa
 
 void myFileManager::NewFile(QString filepath,QString filename){
     QString fullPath = filepath + "/" + filename;
-    QFile file(fullpath);
+    QFile file(fullPath);
 }
 
 void myFileManager::LoadFile(QString filepath,QTextEdit* textedit){
