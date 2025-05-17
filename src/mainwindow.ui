@@ -528,7 +528,7 @@ QToolButton:pressed {
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="start">
      <widget class="QWidget" name="widget_5" native="true">
@@ -1062,6 +1062,7 @@ background-color: rgb(0, 170, 255);
      <zorder>widget_4</zorder>
      <zorder>line_2</zorder>
     </widget>
+    <widget class="QWidget" name="template_2"/>
     <widget class="QWidget" name="readme">
      <widget class="QWidget" name="widget_11" native="true">
       <property name="geometry">
