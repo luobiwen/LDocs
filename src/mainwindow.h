@@ -65,6 +65,32 @@ private slots:
 
     void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
 
+    void on_toolButton_12_pressed();
+
+    void on_toolButton_pressed();
+
+    void on_toolButton_101_pressed();
+
+    void on_toolButton_102_pressed();
+
+    void on_toolButton_103_pressed();
+
+    void on_toolButton_132_pressed();
+
+    void on_pushButton_2_clicked();
+
+    void on_toolButton_6_pressed();
+
+    void on_toolButton_104_pressed();
+
+    void on_toolButton_105_pressed();
+
+    void on_toolButton_107_pressed();
+
+    void on_toolButton_110_pressed();
+
+    void on_toolButton_157_pressed();
+
 private:
     Ui::MainWindow *ui;
     bool m_leftMousePressed;

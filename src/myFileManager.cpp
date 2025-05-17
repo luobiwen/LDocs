@@ -72,7 +72,7 @@ void myFileManager::EditFile(QString filepath,QTextEdit* textedit){
     else textedit->setPlainText("无法编辑文件");
 }
 
-void myFileManager::EditFileName(QString filepath,QLineEdit*lineedit){
+void myFileManager::EditFileName(QString filepath,QLineEdit*lineedit){//filename逻辑有问题
     QFile file(filepath);
     QFileInfo fileInfo(file);
     QString path = fileInfo.dir().absolutePath();
@@ -83,6 +83,72 @@ QJsonObject myFileManager::loadConfig(const QString &path) {
     QFile file(path);
     QJsonDocument doc = QJsonDocument::fromJson(file.readAll());    
     return doc.object();
+}
+
+//search逻辑没写完
+bool myFileManager::RecluserFindItem(QTreeWidgetItem* pFItem, QRegularExpression regExp){
+    myFileManager myfilemanager;
+    QTreeWidget treewidget;
+    bool rethidden = true;
+    if (pFItem == NULL)
+    {
+        return rethidden;
+    }
+
+    int rowcount = 0;
+    for (int c = rowcount - 1; c >= 0; c--)
+    {
+        QTreeWidgetItem* childItem = pFItem->child(1);
+        if (childItem != NULL)
+        {
+            if (regExp.isValid())
+            {
+                RecluserFindItem(childItem, regExp);
+                rethidden = false;
+            }
+            else
+            {
+                bool childret = RecluserFindItem(childItem, regExp);
+                if (childret == false)
+                {
+                    rethidden = false;
+                }
+                QString strName = childItem->data(0,Qt::UserRole).toMap().value("name").toString();
+                if (strName.contains(regExp) || childret == false)
+                {
+                    //找到
+                    rethidden = false;
+                }
+                else
+                {
+                    //未找到
+                }
+            }
+        }
+
+    }
+    return rethidden;
+}
+void myFileManager::RootItemSearch(QString strText)
+{
+    myFileManager myfilemanager;
+    QTreeWidget treewidget;
+    QRegularExpression regExp(strText);
+    for (int i = 0; i < treewidget.columnCount(); i++)
+    {
+        QTreeWidgetItem* topitem =treewidget.topLevelItem(0);
+        bool iret = myfilemanager.RecluserFindItem(topitem, regExp);
+
+        QString strName = topitem->text(0);
+        if (strName.contains(regExp) || iret == false)
+        {
+            //找到
+        }
+        else
+        {
+           //没找到
+        }
+    }
 }
 //使用案例QJsonObject config = loadConfig(":/config.json");
 //QString encryptedToken = config["encrypted_token"].toString();
