@@ -81,74 +81,33 @@ void myFileManager::EditFileName(QString filepath,QLineEdit*lineedit){//filename
 
 QJsonObject myFileManager::loadConfig(const QString &path) {
     QFile file(path);
+    file.open(QIODevice::ReadOnly);
     QJsonDocument doc = QJsonDocument::fromJson(file.readAll());    
     return doc.object();
 }
 
-//search逻辑没写完
-bool myFileManager::RecluserFindItem(QTreeWidgetItem* pFItem, QRegularExpression regExp){
-    myFileManager myfilemanager;
-    QTreeWidget treewidget;
-    bool rethidden = true;
-    if (pFItem == NULL)
-    {
-        return rethidden;
+// 递归过滤函数
+bool myFileManager::filterItems(QTreeWidgetItem* item, const QString& keyword) {
+    bool childMatch = false;
+
+    // 递归检查所有子项
+    for (int i = 0; i < item->childCount(); ++i) {
+        childMatch |= filterItems(item->child(i), keyword);
     }
 
-    int rowcount = 0;
-    for (int c = rowcount - 1; c >= 0; c--)
-    {
-        QTreeWidgetItem* childItem = pFItem->child(1);
-        if (childItem != NULL)
-        {
-            if (regExp.isValid())
-            {
-                RecluserFindItem(childItem, regExp);
-                rethidden = false;
-            }
-            else
-            {
-                bool childret = RecluserFindItem(childItem, regExp);
-                if (childret == false)
-                {
-                    rethidden = false;
-                }
-                QString strName = childItem->data(0,Qt::UserRole).toMap().value("name").toString();
-                if (strName.contains(regExp) || childret == false)
-                {
-                    //找到
-                    rethidden = false;
-                }
-                else
-                {
-                    //未找到
-                }
-            }
-        }
+    // 检查当前项是否匹配（以第0列为例）
+    bool selfMatch = item->text(0).contains(keyword, Qt::CaseInsensitive);
 
-    }
-    return rethidden;
-}
-void myFileManager::RootItemSearch(QString strText)
-{
-    myFileManager myfilemanager;
-    QTreeWidget treewidget;
-    QRegularExpression regExp(strText);
-    for (int i = 0; i < treewidget.columnCount(); i++)
-    {
-        QTreeWidgetItem* topitem =treewidget.topLevelItem(0);
-        bool iret = myfilemanager.RecluserFindItem(topitem, regExp);
+    // 判断是否显示该项
+    bool showItem = selfMatch || childMatch;
+    item->setHidden(!showItem);
 
-        QString strName = topitem->text(0);
-        if (strName.contains(regExp) || iret == false)
-        {
-            //找到
-        }
-        else
-        {
-           //没找到
-        }
+    // 如果匹配，确保父项展开
+    if (showItem && item->parent()) {
+        item->parent()->setExpanded(true);
     }
+
+    return showItem;
 }
 //使用案例QJsonObject config = loadConfig(":/config.json");
 //QString encryptedToken = config["encrypted_token"].toString();

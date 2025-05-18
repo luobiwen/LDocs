@@ -9,18 +9,13 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include<qconfig.h>
-#include"myFileManager.h"
 class myDSManager: public QObject{
 public:
-    explicit myDSManager(QObject *parent = nullptr) : QObject(parent) {
-        manager = new QNetworkAccessManager(this);
-        connect(manager, &QNetworkAccessManager::finished,
-                this, &myDSManager::handleResponse);
-    }
+    myDSManager(QObject *parent = nullptr): QObject(parent){}
     void sendRequest(const QString &prompt);
-private slots:
-    void handleResponse(QNetworkReply *reply);
+
 private:
+    QNetworkReply *reply;
     QJsonObject requestBody;
     QNetworkAccessManager *manager;
 };

@@ -528,7 +528,7 @@ QToolButton:pressed {
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="start">
      <widget class="QWidget" name="widget_5" native="true">
