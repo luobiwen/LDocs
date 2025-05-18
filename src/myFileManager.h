@@ -12,7 +12,7 @@
 #include <QMainWindow>
 class myFileManager{
 public:
-    static void RootItemSearch(QString);
+    bool filterItems(QTreeWidgetItem*, const QString& );
 
     QJsonObject loadConfig(const QString &path);
     QFileInfoList FiletoList(QString,QTreeWidgetItem*);
@@ -24,6 +24,5 @@ public:
 
 
 //ui传不过来
-    bool RecluserFindItem(QTreeWidgetItem* , QRegularExpression);
 };
 #endif // MYFILEMANAGER_H

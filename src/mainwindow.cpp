@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+     myDSManager().sendRequest("你好");
+    showLineNumbers= true;
     ui->setupUi(this);
     ui->stackedWidget->setCurrentWidget(ui->start);
     installEventFiltersToAllWidgets();
@@ -32,10 +34,8 @@ MainWindow::MainWindow(QWidget *parent)
     setIconColor(ui->toolButton_103,QColor(255, 255, 255));
     setIconColor(ui->toolButton_132,QColor(255, 255, 255));
     filemanager = new myFileManager;
-    dsmanager=new myDSManager;
     ui->treeWidget->setHeaderHidden(true);  // 隐藏表头
     curfile="";
-    dsmanager->sendRequest("");
     ui->lineEdit_2->setReadOnly(true);
 }
 //设置图片动画
@@ -337,7 +337,7 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_toolButton_6_pressed()
 {
     HelpDialog *dialog = new HelpDialog(this);
-    QObject::connect(ui->toolButton_104, &QToolButton::clicked, dialog, &HelpDialog::show);
+    QObject::connect(ui->toolButton_6, &QToolButton::clicked, dialog, &HelpDialog::show);
 }
 
 
@@ -352,7 +352,7 @@ void MainWindow::on_toolButton_104_pressed()
 void MainWindow::on_toolButton_105_pressed()
 {
     AboutDialog *dialog = new AboutDialog(this);
-    QObject::connect(ui->toolButton_104, &QToolButton::clicked, dialog, &AboutDialog::show);
+    QObject::connect(ui->toolButton_105, &QToolButton::clicked, dialog, &AboutDialog::show);
 }
 
 
@@ -366,12 +366,25 @@ void MainWindow::on_toolButton_107_pressed()
 void MainWindow::on_toolButton_110_pressed()
 {
     AboutDialog *dialog = new AboutDialog(this);
-    QObject::connect(ui->toolButton_104, &QToolButton::clicked, dialog, &AboutDialog::show);
+    QObject::connect(ui->toolButton_110, &QToolButton::clicked, dialog, &AboutDialog::show);
 }
 
 
 void MainWindow::on_toolButton_157_pressed()
 {
 
+}
+
+
+void MainWindow::on_toolButton_109_pressed()
+{
+    QString outputfile=QFileDialog::getOpenFileName(this,"请选择导出地址","");
+}
+
+
+void MainWindow::on_toolButton_5_pressed()
+{
+    QString prompt=ui->textEdit_7->toPlainText();
+    myDSManager().sendRequest(prompt);
 }
 

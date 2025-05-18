@@ -91,6 +91,10 @@ private slots:
 
     void on_toolButton_157_pressed();
 
+    void on_toolButton_109_pressed();
+
+    void on_toolButton_5_pressed();
+
 private:
     Ui::MainWindow *ui;
     bool m_leftMousePressed;
@@ -99,5 +103,6 @@ private:
     myFileManager* filemanager;
     myDSManager*dsmanager;
     QString curfile;
+    bool showLineNumbers;
 };
 #endif // MAINWINDOW_H
