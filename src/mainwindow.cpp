@@ -1,14 +1,21 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include"myFileManager.h"
+#include"myDSManager.h"
+#include"myHelpDialog.h"
+#include"myAboutDialog.h"
 #include<QFileDialog>
 #include<QMouseEvent>
 #include<QPropertyAnimation>
 #include<QGraphicsColorizeEffect>
-
+//左侧工具栏悬停动画有点问题 curfile统一一下
+//我发现所有的自定义按钮都是点了之后有点问题 都要改
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    dsmanager = new myDSManager();
+    dsmanager->sendRequest("你好");
     ui->setupUi(this);
     ui->stackedWidget->setCurrentWidget(ui->start);
     installEventFiltersToAllWidgets();
@@ -28,7 +35,9 @@ MainWindow::MainWindow(QWidget *parent)
     setIconColor(ui->toolButton_103,QColor(255, 255, 255));
     setIconColor(ui->toolButton_132,QColor(255, 255, 255));
     filemanager = new myFileManager;
-    dsmanager=new myDSManager;
+    ui->treeWidget->setHeaderHidden(true);  // 隐藏表头
+    curfile="";
+    ui->lineEdit_2->setReadOnly(true);
 }
 //设置图片动画
 void MainWindow::setimagecartoon(QToolButton* button){
@@ -59,7 +68,7 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event) {
     if(watched == ui->toolButton_12||watched == ui->toolButton_132||watched == ui->toolButton_101||watched == ui->toolButton_102||watched == ui->toolButton_103||watched == ui->toolButton_105||watched == ui->toolButton){
         filterButtonIconColor(qobject_cast<QToolButton*>(watched),QColor(0, 100, 255),QColor(255, 255, 255),event);
     }
-    if(watched == ui->toolButton_106){
+    if(watched == ui->toolButton_106){//106第一次press了之后背景颜色不能变回来
         filterButtonIconColor(qobject_cast<QToolButton*>(watched),QColor(Qt::white),QColor(0, 170, 255),event);
     }
     if(watched == ui->toolButton_7||watched == ui->toolButton_8||watched == ui->toolButton_6){
@@ -140,14 +149,17 @@ void MainWindow::on_toolButton_132_clicked()
 
 
 void MainWindow::on_toolButton_3_pressed()
-{
+{//filemanger肯定没问题的 测试url能过 那就是这里有点问题 新建要获取到当前的item 然后newfile
     //QString filename=QFileDialog::getOpenFileName(this,"请选择一个文件","");
     //QUrl filename=QFileDialog::getOpenFileUrl(this,"请选择一个文件夹");
     QString filename="C:\\Users\\1\\Desktop\\TugeDocs\\mainw";
-    QTreeWidgetItem * rootitem=new QTreeWidgetItem();
+    curfile=filename;
+    QTreeWidgetItem * rootitem=new QTreeWidgetItem(QStringList()<<"");
+    ui->treeWidget->addTopLevelItem(rootitem);
     if(filename.isEmpty())return;
     //else ui->stackedWidget->setCurrentWidget(ui->html);
     else filemanager->FiletoList(filename,rootitem);
+    return;
 }
 
 //标题鼠标事件
@@ -204,22 +216,381 @@ void MainWindow::on_toolButton_15_pressed()
 
 void MainWindow::on_toolButton_106_pressed()
 {
-    QString filename=QFileDialog::getOpenFileName(this,"请选择一个文件","","TXT(*.txt)");
-    if(filename.isEmpty())return;
-    else ui->stackedWidget->setCurrentWidget(ui->html);
+    curfile=QFileDialog::getOpenFileName(this,"请选择一个文件","","TXT(*.txt)");
+    if(curfile.isEmpty())return;
+    else {
+        ui->stackedWidget->setCurrentWidget(ui->html);
+        filemanager->LoadFile(curfile,ui->textEdit_100);
+        QFileInfo fileinfo(curfile);
+        ui->lineEdit_2->setText(fileinfo.fileName());
+    }
 }
 
 
 void MainWindow::on_toolButton_108_pressed()
 {
-    QString filename=QFileDialog::getOpenFileName(this,"请选择一个文件","","TXT(*.txt)");
-    if(filename.isEmpty())return;
-    else ui->stackedWidget->setCurrentWidget(ui->html);
+    on_toolButton_106_pressed();
 }
-
 
 void MainWindow::on_toolButton_7_pressed()
 {
     ui->stackedWidget->setCurrentWidget(ui->html);
+}
+
+
+void MainWindow::on_toolButton_2_pressed()
+{
+    QTreeWidgetItem * newitem=new QTreeWidgetItem(QStringList()<<"new");
+    newitem->setFlags(newitem->flags() | Qt::ItemIsEditable);
+    ui->treeWidget->addTopLevelItem(newitem);
+}
+
+
+void MainWindow::on_textEdit_100_textChanged()
+{
+    filemanager->EditFile(curfile,ui->textEdit_100);
+}
+
+
+void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)
+{
+    filemanager->EditFileName(curfile,ui->lineEdit_2);
+}
+
+
+void MainWindow::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
+{
+    QString a=myFileManager().getFileName(item,curfile);
+    qDebug()<<a;
+}
+
+
+void MainWindow::on_toolButton_12_pressed()
+{
+    ui->toolButton_12->setStyleSheet("QToolButton {border: none;background-color: rgb(0, 0, 127);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_101->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_102->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_103->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_132->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+}
+
+
+void MainWindow::on_toolButton_pressed()
+{
+    ui->toolButton_12->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton->setStyleSheet("QToolButton {border: none;background-color: rgb(0, 0, 127);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_101->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_102->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_103->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_132->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+}
+
+void MainWindow::on_toolButton_101_pressed()
+{
+    ui->toolButton_12->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_101->setStyleSheet("QToolButton {border: none;background-color: rgb(0, 0, 127);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_102->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_103->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_132->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+}
+
+void MainWindow::on_toolButton_102_pressed()
+{
+    ui->toolButton_12->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_101->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_102->setStyleSheet("QToolButton {border: none;background-color: rgb(0, 0, 127);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_103->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_132->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+}
+
+void MainWindow::on_toolButton_103_pressed()
+{
+    ui->toolButton_12->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_101->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_102->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_103->setStyleSheet("QToolButton {border: none;background-color: rgb(0, 0, 127);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_132->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+}
+
+void MainWindow::on_toolButton_132_pressed()
+{
+    ui->toolButton_12->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_101->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_102->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_103->setStyleSheet("QToolButton {border: none;background-color: rgb(77, 82, 147);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+    ui->toolButton_132->setStyleSheet("QToolButton {border: none;background-color: rgb(0, 0, 127);color: white;padding: 4px;font:bold 16px;border-top-left-radius:20px;border-bottom-left-radius:20px;}");
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    QString pic=QFileDialog::getOpenFileName(this,"请选择一个文件","","PNG(*.png);;JPG(*.jpg)");
+    QString style=QString("QPushButton{border:1px solid;  rgb(77, 82, 147);border-radius:25px;    padding:0px 0px;  background-image: url(%1); background-repeat:no-reapeat;background-position:center;background-size:cover; color:white;	min-width:50px;min-height:50px;font:bold 18px;").arg(pic);
+    ui->pushButton_2->setStyleSheet(style);
+}
+
+
+void MainWindow::on_toolButton_6_pressed()
+{
+    on_toolButton_104_pressed();
+}
+
+
+
+void MainWindow::on_toolButton_104_pressed()
+{//dialog的菜单栏还得改
+    HelpDialog *dialog = new HelpDialog(this);
+    dialog->show();
+}
+
+
+void MainWindow::on_toolButton_105_pressed()
+{
+    AboutDialog *dialog = new AboutDialog(this);
+    dialog->show();
+}
+
+
+void MainWindow::on_toolButton_107_pressed()
+{
+    curfile="";
+    ui->stackedWidget->setCurrentWidget(ui->html);
+}
+
+
+void MainWindow::on_toolButton_110_pressed()
+{
+    AboutDialog *dialog = new AboutDialog(this);
+    QObject::connect(ui->toolButton_110, &QToolButton::clicked, dialog, &AboutDialog::show);
+}
+
+
+void MainWindow::on_toolButton_157_pressed()
+{
+    myFileManager().filterItems(ui->treeWidget->topLevelItem(0),ui->lineEdit->text());
+}
+
+
+void MainWindow::on_toolButton_109_pressed()
+{
+    QString outputfile=QFileDialog::getOpenFileName(this,"请选择导出地址","");
+
+}
+
+
+void MainWindow::on_toolButton_5_pressed()
+{
+    QString prompt = ui->textEdit_7->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_100;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+void MainWindow::onResponseReceived(const QString &text) {
+    curtextedit->setHtml("<pre>" + text.toHtmlEscaped() + "</pre>"); // 将API响应显示到QTextEdit
+}
+
+void MainWindow::on_toolButton_4_pressed()
+{
+    QString prompt=ui->textEdit_6->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_5;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+
+void MainWindow::on_toolButton_11_pressed()
+{
+    QString prompt=ui->textEdit_19->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_20;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+
+void MainWindow::on_toolButton_8_pressed()
+{
+    QString prompt=ui->textEdit_13->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_14;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+
+void MainWindow::on_toolButton_9_pressed()
+{
+    QString prompt=ui->textEdit_15->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_16;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+
+void MainWindow::on_toolButton_10_pressed()
+{
+    QString prompt=ui->textEdit_17->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_18;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+
+void MainWindow::on_toolButton_113_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_130_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_155_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_143_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_147_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_151_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_114_pressed()
+{
+    on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_112_pressed()
+{
+    on_toolButton_106_pressed();
+}
+
+
+void MainWindow::on_toolButton_111_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_128_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_129_pressed()
+{
+     on_toolButton_106_pressed();
+}
+
+void MainWindow::on_toolButton_131_pressed()
+{
+     on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_153_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_154_pressed()
+{
+    on_toolButton_106_pressed();
+}
+
+
+void MainWindow::on_toolButton_156_pressed()
+{
+    on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_141_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_142_pressed()
+{
+     on_toolButton_106_pressed();
+}
+
+
+void MainWindow::on_toolButton_144_pressed()
+{
+    on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_145_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_146_pressed()
+{
+     on_toolButton_106_pressed();
+}
+
+
+void MainWindow::on_toolButton_148_pressed()
+{
+    on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_149_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_150_pressed()
+{
+    on_toolButton_106_pressed();
+}
+
+
+void MainWindow::on_toolButton_152_pressed()
+{
+    on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_200_pressed()
+{
+
 }
 
