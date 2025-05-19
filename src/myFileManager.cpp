@@ -63,6 +63,7 @@ void myFileManager::LoadFile(QString filepath,QTextEdit* textedit){
 }
 
 void myFileManager::EditFile(QString filepath,QTextEdit* textedit){
+    if(filepath.isEmpty())return;
     QFile file(filepath);
     if (file.open(QIODevice::ReadOnly|QIODevice::WriteOnly | QIODevice::Text)) {
         QByteArray array=textedit->toPlainText().toUtf8();
@@ -88,25 +89,23 @@ QJsonObject myFileManager::loadConfig(const QString &path) {
 
 // 递归过滤函数
 bool myFileManager::filterItems(QTreeWidgetItem* item, const QString& keyword) {
+    //搜索是能搜了 但是没有展示搜到的内容
     bool childMatch = false;
-
+    qDebug()<<"跑到了";
+    if(!item)return false;
     // 递归检查所有子项
     for (int i = 0; i < item->childCount(); ++i) {
         childMatch |= filterItems(item->child(i), keyword);
     }
-
     // 检查当前项是否匹配（以第0列为例）
     bool selfMatch = item->text(0).contains(keyword, Qt::CaseInsensitive);
-
     // 判断是否显示该项
     bool showItem = selfMatch || childMatch;
     item->setHidden(!showItem);
-
     // 如果匹配，确保父项展开
     if (showItem && item->parent()) {
         item->parent()->setExpanded(true);
     }
-
     return showItem;
 }
 //使用案例QJsonObject config = loadConfig(":/config.json");

@@ -9,12 +9,13 @@
 #include<QPropertyAnimation>
 #include<QGraphicsColorizeEffect>
 //左侧工具栏悬停动画有点问题 curfile统一一下
+//我发现所有的自定义按钮都是点了之后有点问题 都要改
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-     myDSManager().sendRequest("你好");
-    showLineNumbers= true;
+    dsmanager = new myDSManager();
+    dsmanager->sendRequest("你好");
     ui->setupUi(this);
     ui->stackedWidget->setCurrentWidget(ui->start);
     installEventFiltersToAllWidgets();
@@ -219,7 +220,7 @@ void MainWindow::on_toolButton_106_pressed()
     if(curfile.isEmpty())return;
     else {
         ui->stackedWidget->setCurrentWidget(ui->html);
-        filemanager->LoadFile(curfile,ui->textEdit_8);
+        filemanager->LoadFile(curfile,ui->textEdit_100);
         QFileInfo fileinfo(curfile);
         ui->lineEdit_2->setText(fileinfo.fileName());
     }
@@ -245,9 +246,9 @@ void MainWindow::on_toolButton_2_pressed()
 }
 
 
-void MainWindow::on_textEdit_8_textChanged()
+void MainWindow::on_textEdit_100_textChanged()
 {
-    filemanager->EditFile(curfile,ui->textEdit_8);
+    filemanager->EditFile(curfile,ui->textEdit_100);
 }
 
 
@@ -336,8 +337,7 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_toolButton_6_pressed()
 {
-    HelpDialog *dialog = new HelpDialog(this);
-    QObject::connect(ui->toolButton_6, &QToolButton::clicked, dialog, &HelpDialog::show);
+    on_toolButton_104_pressed();
 }
 
 
@@ -345,14 +345,14 @@ void MainWindow::on_toolButton_6_pressed()
 void MainWindow::on_toolButton_104_pressed()
 {//dialog的菜单栏还得改
     HelpDialog *dialog = new HelpDialog(this);
-    QObject::connect(ui->toolButton_104, &QToolButton::clicked, dialog, &HelpDialog::show);
+    dialog->show();
 }
 
 
 void MainWindow::on_toolButton_105_pressed()
 {
     AboutDialog *dialog = new AboutDialog(this);
-    QObject::connect(ui->toolButton_105, &QToolButton::clicked, dialog, &AboutDialog::show);
+    dialog->show();
 }
 
 
@@ -372,19 +372,225 @@ void MainWindow::on_toolButton_110_pressed()
 
 void MainWindow::on_toolButton_157_pressed()
 {
-
+    myFileManager().filterItems(ui->treeWidget->topLevelItem(0),ui->lineEdit->text());
 }
 
 
 void MainWindow::on_toolButton_109_pressed()
 {
     QString outputfile=QFileDialog::getOpenFileName(this,"请选择导出地址","");
+
 }
 
 
 void MainWindow::on_toolButton_5_pressed()
 {
-    QString prompt=ui->textEdit_7->toPlainText();
-    myDSManager().sendRequest(prompt);
+    QString prompt = ui->textEdit_7->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_100;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+void MainWindow::onResponseReceived(const QString &text) {
+    curtextedit->setHtml("<pre>" + text.toHtmlEscaped() + "</pre>"); // 将API响应显示到QTextEdit
+}
+
+void MainWindow::on_toolButton_4_pressed()
+{
+    QString prompt=ui->textEdit_6->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_5;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+
+void MainWindow::on_toolButton_11_pressed()
+{
+    QString prompt=ui->textEdit_19->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_20;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+
+void MainWindow::on_toolButton_8_pressed()
+{
+    QString prompt=ui->textEdit_13->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_14;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+
+void MainWindow::on_toolButton_9_pressed()
+{
+    QString prompt=ui->textEdit_15->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_16;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+
+void MainWindow::on_toolButton_10_pressed()
+{
+    QString prompt=ui->textEdit_17->toPlainText();
+    dsmanager->sendRequest(prompt);
+    curtextedit = ui->textEdit_18;
+    connect(dsmanager, &myDSManager::responseReceived,
+            this, &MainWindow::onResponseReceived);
+}
+
+
+void MainWindow::on_toolButton_113_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_130_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_155_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_143_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_147_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_151_pressed()
+{
+
+}
+
+
+void MainWindow::on_toolButton_114_pressed()
+{
+    on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_112_pressed()
+{
+    on_toolButton_106_pressed();
+}
+
+
+void MainWindow::on_toolButton_111_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_128_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_129_pressed()
+{
+     on_toolButton_106_pressed();
+}
+
+void MainWindow::on_toolButton_131_pressed()
+{
+     on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_153_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_154_pressed()
+{
+    on_toolButton_106_pressed();
+}
+
+
+void MainWindow::on_toolButton_156_pressed()
+{
+    on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_141_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_142_pressed()
+{
+     on_toolButton_106_pressed();
+}
+
+
+void MainWindow::on_toolButton_144_pressed()
+{
+    on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_145_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_146_pressed()
+{
+     on_toolButton_106_pressed();
+}
+
+
+void MainWindow::on_toolButton_148_pressed()
+{
+    on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_149_pressed()
+{
+    on_toolButton_7_pressed();
+}
+
+
+void MainWindow::on_toolButton_150_pressed()
+{
+    on_toolButton_106_pressed();
+}
+
+
+void MainWindow::on_toolButton_152_pressed()
+{
+    on_toolButton_105_pressed();
+}
+
+
+void MainWindow::on_toolButton_200_pressed()
+{
+
 }
 
