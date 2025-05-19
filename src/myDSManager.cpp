@@ -1,7 +1,9 @@
 #include"myDSManager.h"
 #include"myFileManager.h"
+myDSManager::myDSManager(QObject *parent): QObject(parent){
 
-void myDSManager::sendRequest(const QString &prompt){//有回答了 不过我网络有点不好 改天再试试
+}
+void myDSManager::sendRequest(const QString &prompt){
     QNetworkAccessManager *manager = new QNetworkAccessManager();
 
     // 1. 构造请求 JSON
@@ -42,6 +44,7 @@ void myDSManager::sendRequest(const QString &prompt){//有回答了 不过我网
                     QJsonObject choice = choices[0].toObject();
                     QJsonObject message = choice["message"].toObject();
                     qDebug() << "回答:" << message["content"].toString();
+                    emit responseReceived(message["content"].toString());
                 }
             }
         } else {
@@ -53,6 +56,3 @@ void myDSManager::sendRequest(const QString &prompt){//有回答了 不过我网
         manager->deleteLater();
     });
 }
-
-
-

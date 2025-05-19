@@ -59,7 +59,7 @@ private slots:
 
     void on_toolButton_2_pressed();
 
-    void on_textEdit_8_textChanged();
+    void on_textEdit_100_textChanged();
 
     void on_lineEdit_2_textChanged(const QString &arg1);
 
@@ -95,14 +95,76 @@ private slots:
 
     void on_toolButton_5_pressed();
 
+    void on_toolButton_4_pressed();
+
+    void on_toolButton_11_pressed();
+
+    void on_toolButton_8_pressed();
+
+    void on_toolButton_9_pressed();
+
+    void on_toolButton_10_pressed();
+    void onResponseReceived(const QString &text);
+
+    void on_toolButton_113_pressed();
+
+    void on_toolButton_130_pressed();
+
+    void on_toolButton_155_pressed();
+
+    void on_toolButton_143_pressed();
+
+    void on_toolButton_147_pressed();
+
+    void on_toolButton_151_pressed();
+
+    void on_toolButton_114_pressed();
+
+    void on_toolButton_112_pressed();
+
+    void on_toolButton_111_pressed();
+
+    void on_toolButton_128_pressed();
+
+    void on_toolButton_129_pressed();
+
+    void on_toolButton_131_pressed();
+
+    void on_toolButton_153_pressed();
+
+    void on_toolButton_154_pressed();
+
+    void on_toolButton_156_pressed();
+
+    void on_toolButton_141_pressed();
+
+    void on_toolButton_142_pressed();
+
+    void on_toolButton_144_pressed();
+
+    void on_toolButton_145_pressed();
+
+    void on_toolButton_146_pressed();
+
+    void on_toolButton_148_pressed();
+
+    void on_toolButton_149_pressed();
+
+    void on_toolButton_150_pressed();
+
+    void on_toolButton_152_pressed();
+
+    void on_toolButton_200_pressed();
+
 private:
     Ui::MainWindow *ui;
     bool m_leftMousePressed;
     QPoint m_StartPoint;
     QPropertyAnimation *scaleAnim;
     myFileManager* filemanager;
-    myDSManager*dsmanager;
+    myDSManager* dsmanager;
     QString curfile;
     bool showLineNumbers;
+    QTextEdit *curtextedit;
 };
 #endif // MAINWINDOW_H

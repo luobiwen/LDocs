@@ -10,12 +10,14 @@
 #include <QJsonArray>
 #include<qconfig.h>
 class myDSManager: public QObject{
+    Q_OBJECT
 public:
-    myDSManager(QObject *parent = nullptr): QObject(parent){}
+    myDSManager(QObject *parent = nullptr);
     void sendRequest(const QString &prompt);
 
+signals:
+    void responseReceived(const QString &text); // 传递API响应的信号
 private:
-    QNetworkReply *reply;
     QJsonObject requestBody;
     QNetworkAccessManager *manager;
 };
