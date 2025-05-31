@@ -8,6 +8,7 @@
 #include<QMouseEvent>
 #include<QPropertyAnimation>
 #include<QGraphicsColorizeEffect>
+#include<QDesktopServices>
 //左侧工具栏悬停动画有点问题 curfile统一一下
 //我发现所有的自定义按钮都是点了之后有点问题 都要改
 MainWindow::MainWindow(QWidget *parent)
@@ -152,8 +153,8 @@ void MainWindow::on_toolButton_3_pressed()
 {//filemanger肯定没问题的 测试url能过 那就是这里有点问题 新建要获取到当前的item 然后newfile
     //QString filename=QFileDialog::getOpenFileName(this,"请选择一个文件","");
     //QUrl filename=QFileDialog::getOpenFileUrl(this,"请选择一个文件夹");
-    QString filename="C:\\Users\\1\\Desktop\\TugeDocs\\mainw";
-    curfile=filename;
+    QString filename="C:/Users/1/Desktop/TugeDocs/mainw";
+    curfile = filename;
     QTreeWidgetItem * rootitem=new QTreeWidgetItem(QStringList()<<"");
     ui->treeWidget->addTopLevelItem(rootitem);
     if(filename.isEmpty())return;
@@ -243,6 +244,8 @@ void MainWindow::on_toolButton_2_pressed()
     QTreeWidgetItem * newitem=new QTreeWidgetItem(QStringList()<<"new");
     newitem->setFlags(newitem->flags() | Qt::ItemIsEditable);
     ui->treeWidget->addTopLevelItem(newitem);
+    QString path=curfile+myFileManager().getItemPath(ui->treeWidget->topLevelItem(0));
+    myFileManager().NewFile(path,"newitem.txt");
 }
 
 
@@ -254,14 +257,16 @@ void MainWindow::on_textEdit_100_textChanged()
 
 void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)
 {
-    filemanager->EditFileName(curfile,ui->lineEdit_2);
+    //filemanager->EditFileName(curfile,ui->lineEdit_2);
 }
 
 
 void MainWindow::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
 {
-    QString a=myFileManager().getFileName(item,curfile);
-    qDebug()<<a;
+    // QString cleanPath = QDir::cleanPath(a);
+    // QUrl url = QUrl::fromLocalFile(cleanPath);
+    // QUrl a=curfile+(myFileManager().getItemPath(item)).toString();
+    //QDesktopServices::openUrl(url);
 }
 
 
@@ -372,7 +377,8 @@ void MainWindow::on_toolButton_110_pressed()
 
 void MainWindow::on_toolButton_157_pressed()
 {
-    myFileManager().filterItems(ui->treeWidget->topLevelItem(0),ui->lineEdit->text());
+    //myFileManager().searchAndHighlightInTreeWidget(ui->lineEdit->text(), ui->treeWidget);
+    //myFileManager().filterItems(ui->treeWidget->topLevelItem(0),ui->lineEdit->text());
 }
 
 
@@ -422,7 +428,7 @@ void MainWindow::on_toolButton_8_pressed()
     dsmanager->sendRequest(prompt);
     curtextedit = ui->textEdit_14;
     connect(dsmanager, &myDSManager::responseReceived,
-            this, &MainWindow::onResponseReceived);
+           this, &MainWindow::onResponseReceived);
 }
 
 
@@ -432,7 +438,7 @@ void MainWindow::on_toolButton_9_pressed()
     dsmanager->sendRequest(prompt);
     curtextedit = ui->textEdit_16;
     connect(dsmanager, &myDSManager::responseReceived,
-            this, &MainWindow::onResponseReceived);
+           this, &MainWindow::onResponseReceived);
 }
 
 
@@ -592,5 +598,20 @@ void MainWindow::on_toolButton_152_pressed()
 void MainWindow::on_toolButton_200_pressed()
 {
 
+}
+
+
+void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+
+}
+
+
+
+void MainWindow::on_treeWidget_itemChanged(QTreeWidgetItem *item, int column)
+{
+    qDebug()<<curfile+"/"+myFileManager().getItemPath(item);
+    myFileManager().renameFile("C:\\Users\\1\\Desktop\\TugeDocs\\mainw\\new","ne");
+    //myFileManager().renameFile(curfile+"/"+myFileManager().getItemPath(item),item->text(0));
 }
 

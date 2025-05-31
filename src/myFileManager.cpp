@@ -30,24 +30,20 @@ QFileInfoList myFileManager::FiletoList(QString dicpath,QTreeWidgetItem* rootite
     return file_list;
 }
 
-//获取list节点路径
-QString myFileManager::getFileName(QTreeWidgetItem *pItem, QString currentrootpath)
-{
-    QTreeWidgetItem *pHeadItem = pItem;
-    QString file_path;
-    file_path = pItem->text(0);
-    QTreeWidgetItem* pParentItem = pItem->parent();
-    while (pParentItem!=nullptr && pParentItem!=pHeadItem) {
-        file_path = pParentItem->text(0) + "\\" + file_path;
-        pParentItem = pParentItem->parent();
+void myFileManager::NewFile(QString filepath,QString filename){//外url里string
+    //QString fullPath = filepath.toString() + "/" + filename;
+    QFile file(filepath+ "/new");
+    if(file.open(QIODevice::ReadWrite|QIODevice::Text)){
+        QString temp = "这是一条测试文本"; // 写入内容
+        // 将内容写入文件
+        QTextStream out(&file);
+        out << temp;
+        file.close();
     }
-    file_path = currentrootpath + "\\" + file_path;
-    return file_path;
 }
 
-void myFileManager::NewFile(QString filepath,QString filename){
-    QString fullPath = filepath + "/" + filename;
-    QFile file(fullPath);
+void myFileManager::NewFolder(QString filepath){
+    QDir().mkdir(filepath);
 }
 
 void myFileManager::LoadFile(QString filepath,QTextEdit* textedit){
@@ -73,11 +69,67 @@ void myFileManager::EditFile(QString filepath,QTextEdit* textedit){
     else textedit->setPlainText("无法编辑文件");
 }
 
-void myFileManager::EditFileName(QString filepath,QLineEdit*lineedit){//filename逻辑有问题
-    QFile file(filepath);
-    QFileInfo fileInfo(file);
-    QString path = fileInfo.dir().absolutePath();
-    file.rename(filepath);
+void myFileManager::clearHighlights(QTreeWidget *treeWidget)
+{
+    QTreeWidgetItemIterator it(treeWidget);
+    while (*it) {
+        for (int col = 0; col < (*it)->columnCount(); ++col) {
+            (*it)->setBackground(col, QBrush(Qt::white));
+            (*it)->setForeground(col, QBrush(Qt::black));
+        }
+        ++it;
+    }
+    treeWidget->setCurrentItem(nullptr);
+}
+
+QTreeWidgetItem* myFileManager::findAndHighlight(QTreeWidgetItem *item, const QString &keyword, bool &firstMatchFound)
+{
+    if (!item) return nullptr;
+
+    QTreeWidgetItem *firstMatchInBranch = nullptr;
+    bool currentItemMatched = false;
+
+    // 检查当前项的所有列
+    for (int col = 0; col < item->columnCount(); ++col) {
+        if (item->text(col).contains(keyword, Qt::CaseInsensitive)) {
+            // 高亮匹配项
+            item->setBackground(col, QBrush(QColor(255, 255, 0))); // 黄色背景
+            item->setForeground(col, QBrush(Qt::black));
+        }
+    }
+
+    // 递归检查子项
+    for (int i = 0; i < item->childCount(); ++i) {
+        QTreeWidgetItem *childMatch = findAndHighlight(item->child(i), keyword, firstMatchFound);
+        if (childMatch && !firstMatchInBranch) {
+            firstMatchInBranch = childMatch;
+            item->setExpanded(true); // 展开父项以便显示匹配的子项
+        }
+    }
+
+    return firstMatchInBranch;
+}
+
+QString myFileManager::getItemPath(QTreeWidgetItem* item) {
+    QStringList pathParts;
+    while (item) {
+        pathParts.prepend(item->text(0));
+        item = item->parent();
+    }
+    QString a=pathParts.join("\\");
+    return a;
+
+}
+
+void myFileManager::renameFile(const QString oldPath, const QString newName)
+{
+    qDebug()<<oldPath;
+    QFile file(oldPath);
+    QFileInfo oldInfo(oldPath);
+    QDir parentDir = oldInfo.dir();
+    QString newPath = parentDir.filePath(newName);
+    QFile::rename(oldPath, newPath);
+    qDebug()<<newPath;
 }
 
 QJsonObject myFileManager::loadConfig(const QString &path) {
@@ -85,28 +137,6 @@ QJsonObject myFileManager::loadConfig(const QString &path) {
     file.open(QIODevice::ReadOnly);
     QJsonDocument doc = QJsonDocument::fromJson(file.readAll());    
     return doc.object();
-}
-
-// 递归过滤函数
-bool myFileManager::filterItems(QTreeWidgetItem* item, const QString& keyword) {
-    //搜索是能搜了 但是没有展示搜到的内容
-    bool childMatch = false;
-    qDebug()<<"跑到了";
-    if(!item)return false;
-    // 递归检查所有子项
-    for (int i = 0; i < item->childCount(); ++i) {
-        childMatch |= filterItems(item->child(i), keyword);
-    }
-    // 检查当前项是否匹配（以第0列为例）
-    bool selfMatch = item->text(0).contains(keyword, Qt::CaseInsensitive);
-    // 判断是否显示该项
-    bool showItem = selfMatch || childMatch;
-    item->setHidden(!showItem);
-    // 如果匹配，确保父项展开
-    if (showItem && item->parent()) {
-        item->parent()->setExpanded(true);
-    }
-    return showItem;
 }
 //使用案例QJsonObject config = loadConfig(":/config.json");
 //QString encryptedToken = config["encrypted_token"].toString();

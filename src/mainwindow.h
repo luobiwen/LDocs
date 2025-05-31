@@ -156,6 +156,10 @@ private slots:
 
     void on_toolButton_200_pressed();
 
+    void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
+    void on_treeWidget_itemChanged(QTreeWidgetItem *item, int column);
+
 private:
     Ui::MainWindow *ui;
     bool m_leftMousePressed;
