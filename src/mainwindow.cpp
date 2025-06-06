@@ -150,16 +150,14 @@ void MainWindow::on_toolButton_132_clicked()
 
 
 void MainWindow::on_toolButton_3_pressed()
-{//filemanger肯定没问题的 测试url能过 那就是这里有点问题 新建要获取到当前的item 然后newfile
-    //QString filename=QFileDialog::getOpenFileName(this,"请选择一个文件","");
-    //QUrl filename=QFileDialog::getOpenFileUrl(this,"请选择一个文件夹");
-    QString filename="C:/Users/1/Desktop/TugeDocs/mainw";
-    curfile = filename;
+{
+    QUrl filename1=QFileDialog::getExistingDirectory(this,"请选择一个文件夹");
+    curfile = filename1.toString();
     QTreeWidgetItem * rootitem=new QTreeWidgetItem(QStringList()<<"");
     ui->treeWidget->addTopLevelItem(rootitem);
-    if(filename.isEmpty())return;
+    if(curfile.isEmpty())return;
     //else ui->stackedWidget->setCurrentWidget(ui->html);
-    else filemanager->FiletoList(filename,rootitem);
+    else filemanager->FiletoList(curfile,rootitem);
     return;
 }
 
@@ -241,11 +239,40 @@ void MainWindow::on_toolButton_7_pressed()
 
 void MainWindow::on_toolButton_2_pressed()
 {
-    QTreeWidgetItem * newitem=new QTreeWidgetItem(QStringList()<<"new");
-    newitem->setFlags(newitem->flags() | Qt::ItemIsEditable);
-    ui->treeWidget->addTopLevelItem(newitem);
-    QString path=curfile+myFileManager().getItemPath(ui->treeWidget->topLevelItem(0));
-    myFileManager().NewFile(path,"newitem.txt");
+    // 获取当前选中项
+    QTreeWidgetItem *selectedItem = ui->treeWidget->currentItem();
+    QString parentPath = curfile+myFileManager().getItemPath(selectedItem);
+
+    // 如果是文件则取其所在目录
+    if(!QFileInfo(parentPath).isDir()) {
+        parentPath = QFileInfo(parentPath).path();
+    }
+    myFileManager().NewFile(parentPath, "newitem");
+    QTreeWidgetItem *newItem = new QTreeWidgetItem(QStringList() << "newitem");
+    newItem->setFlags(newItem->flags() | Qt::ItemIsEditable);
+
+    // 添加到正确位置
+    if(selectedItem && selectedItem->isSelected()) {
+        // 如果选中的是目录，添加到子节点
+        if(QFileInfo(parentPath).isDir()) {
+            selectedItem->addChild(newItem);
+            selectedItem->setExpanded(true); // 自动展开
+        }
+        // 如果选中的是文件，添加到同级
+        else {
+            if(selectedItem->parent()) {
+                selectedItem->parent()->addChild(newItem);
+            } else {
+                ui->treeWidget->addTopLevelItem(newItem);
+            }
+        }
+    } else {
+        // 没有选中项时添加到根目录
+        ui->treeWidget->addTopLevelItem(newItem);
+    }
+
+    // 立即进入编辑状态
+    ui->treeWidget->editItem(newItem, 0);
 }
 
 
@@ -377,8 +404,8 @@ void MainWindow::on_toolButton_110_pressed()
 
 void MainWindow::on_toolButton_157_pressed()
 {
-    //myFileManager().searchAndHighlightInTreeWidget(ui->lineEdit->text(), ui->treeWidget);
-    //myFileManager().filterItems(ui->treeWidget->topLevelItem(0),ui->lineEdit->text());
+    //搜索有点问题
+    //myFileManager().findAndHighlight(ui->treeWidget->topLevelItem(0),ui->lineEdit->text(),false);
 }
 
 
@@ -603,15 +630,14 @@ void MainWindow::on_toolButton_200_pressed()
 
 void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
-
+    orifile=curfile+"/"+myFileManager().getItemPath(item);
+    qDebug()<<orifile;
 }
 
 
 
 void MainWindow::on_treeWidget_itemChanged(QTreeWidgetItem *item, int column)
 {
-    qDebug()<<curfile+"/"+myFileManager().getItemPath(item);
-    myFileManager().renameFile("C:\\Users\\1\\Desktop\\TugeDocs\\mainw\\new","ne");
-    //myFileManager().renameFile(curfile+"/"+myFileManager().getItemPath(item),item->text(0));
+    myFileManager().renameFile(orifile,item->text(0));
 }
 

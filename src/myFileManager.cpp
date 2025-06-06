@@ -30,9 +30,9 @@ QFileInfoList myFileManager::FiletoList(QString dicpath,QTreeWidgetItem* rootite
     return file_list;
 }
 
-void myFileManager::NewFile(QString filepath,QString filename){//外url里string
+void myFileManager::NewFile(QString filepath,QString filename){
     //QString fullPath = filepath.toString() + "/" + filename;
-    QFile file(filepath+ "/new");
+    QFile file(filepath+ "/"+filename);
     if(file.open(QIODevice::ReadWrite|QIODevice::Text)){
         QString temp = "这是一条测试文本"; // 写入内容
         // 将内容写入文件
@@ -82,7 +82,7 @@ void myFileManager::clearHighlights(QTreeWidget *treeWidget)
     treeWidget->setCurrentItem(nullptr);
 }
 
-QTreeWidgetItem* myFileManager::findAndHighlight(QTreeWidgetItem *item, const QString &keyword, bool &firstMatchFound)
+QTreeWidgetItem* myFileManager::findAndHighlight(QTreeWidgetItem *item, const QString &keyword, bool firstMatchFound)
 {
     if (!item) return nullptr;
 
@@ -116,20 +116,18 @@ QString myFileManager::getItemPath(QTreeWidgetItem* item) {
         pathParts.prepend(item->text(0));
         item = item->parent();
     }
-    QString a=pathParts.join("\\");
+    QString a=pathParts.join("/");
     return a;
 
 }
 
 void myFileManager::renameFile(const QString oldPath, const QString newName)
 {
-    qDebug()<<oldPath;
-    QFile file(oldPath);
-    QFileInfo oldInfo(oldPath);
-    QDir parentDir = oldInfo.dir();
-    QString newPath = parentDir.filePath(newName);
-    QFile::rename(oldPath, newPath);
-    qDebug()<<newPath;
+     QFileInfo oldInfo(oldPath);
+     QString newPath = oldInfo.dir().filePath(newName);
+     QFile file(oldPath);
+     file.rename(newPath);
+     file.open(QIODevice::ReadWrite|QIODevice::Text);
 }
 
 QJsonObject myFileManager::loadConfig(const QString &path) {

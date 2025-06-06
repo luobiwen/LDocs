@@ -168,6 +168,7 @@ private:
     myFileManager* filemanager;
     myDSManager* dsmanager;
     QString curfile;
+    QString orifile;
     bool showLineNumbers;
     QTextEdit *curtextedit;
 };
