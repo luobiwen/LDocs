@@ -11,6 +11,7 @@ QFileInfoList myFileManager::FiletoList(QString dicpath,QTreeWidgetItem* rootite
         QTreeWidgetItem* child = new QTreeWidgetItem(QStringList()<<name2);
         child->setCheckState(1, Qt::Checked);
         child->setText(0,name2);
+        child->setFlags(child->flags() | Qt::ItemIsEditable);
         rootitem->addChild(child);
     }
     QFileInfoList file_list=dir.entryInfoList(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -22,6 +23,7 @@ QFileInfoList myFileManager::FiletoList(QString dicpath,QTreeWidgetItem* rootite
         QTreeWidgetItem* childroot = new QTreeWidgetItem(QStringList()<<name);
         childroot->setCheckState(1, Qt::Checked);
         childroot->setText(0,name);
+        childroot->setFlags(childroot->flags() | Qt::ItemIsEditable);
         rootitem->addChild(childroot);
         QFileInfoList child_file_list = FiletoList(namepath,childroot);          //进行递归
         file_list.append(child_file_list);
@@ -32,6 +34,7 @@ QFileInfoList myFileManager::FiletoList(QString dicpath,QTreeWidgetItem* rootite
 
 void myFileManager::NewFile(QString filepath,QString filename){
     //QString fullPath = filepath.toString() + "/" + filename;
+    qDebug()<<"新文件"+filepath+ "/"+filename;
     QFile file(filepath+ "/"+filename);
     if(file.open(QIODevice::ReadWrite|QIODevice::Text)){
         QString temp = "这是一条测试文本"; // 写入内容
@@ -46,7 +49,7 @@ void myFileManager::NewFolder(QString filepath){
     QDir().mkdir(filepath);
 }
 
-void myFileManager::LoadFile(QString filepath,QTextEdit* textedit){
+void myFileManager::LoadFile(QString filepath,QTextEdit* textedit){//loadfile还有问题
     if(filepath.isEmpty())return;
     QFile file(filepath);
     if (file.open(QIODevice::ReadOnly|QIODevice::WriteOnly | QIODevice::Text)) {
@@ -84,6 +87,7 @@ void myFileManager::clearHighlights(QTreeWidget *treeWidget)
 
 QTreeWidgetItem* myFileManager::findAndHighlight(QTreeWidgetItem *item, const QString &keyword, bool firstMatchFound)
 {
+    if(keyword=="")return nullptr;
     if (!item) return nullptr;
 
     QTreeWidgetItem *firstMatchInBranch = nullptr;
@@ -121,13 +125,26 @@ QString myFileManager::getItemPath(QTreeWidgetItem* item) {
 
 }
 
-void myFileManager::renameFile(const QString oldPath, const QString newName)
+bool myFileManager::renameFile(const QString &oldPath, const QString &newName)
 {
-     QFileInfo oldInfo(oldPath);
-     QString newPath = oldInfo.dir().filePath(newName);
-     QFile file(oldPath);
-     file.rename(newPath);
-     file.open(QIODevice::ReadWrite|QIODevice::Text);
+    QFileInfo oldInfo(oldPath);
+    if (!oldInfo.exists()) {
+        qDebug() << "文件不存在:" << oldPath;
+        return false;
+    }
+    QString newPath = oldInfo.dir().filePath(newName);
+    // 避免重复名称
+    if (QFileInfo::exists(newPath)) {
+        qDebug() << "目标文件已存在:" << newPath;
+        return false;
+    }
+    QFile file(oldPath);
+    if (!file.rename(newPath)) {
+        qDebug() << "重命名失败:" << file.errorString();
+        return false;
+    }
+
+    return true;
 }
 
 QJsonObject myFileManager::loadConfig(const QString &path) {
@@ -135,6 +152,16 @@ QJsonObject myFileManager::loadConfig(const QString &path) {
     file.open(QIODevice::ReadOnly);
     QJsonDocument doc = QJsonDocument::fromJson(file.readAll());    
     return doc.object();
+}
+
+// HTML适配函数（解决Qt渲染差异）
+QString myFileManager::adaptHtmlForQt(const QString &originalHtml)
+{
+    QString adapted = originalHtml;
+    adapted.replace("px", "pt");
+    adapted.insert(6, "<style>body { font-family: 'Arial'; }</style>");
+    adapted.replace("<table", "<table border='1' cellpadding='2'");
+    return adapted;
 }
 //使用案例QJsonObject config = loadConfig(":/config.json");
 //QString encryptedToken = config["encrypted_token"].toString();

@@ -9,7 +9,12 @@
 #include<QPropertyAnimation>
 #include<QGraphicsColorizeEffect>
 #include<QDesktopServices>
-//左侧工具栏悬停动画有点问题 curfile统一一下
+#include<QStandardPaths>
+#include<Qprinter>
+#include <QPrintDialog>
+#include <QPageSetupDialog>
+#include <QPageSize>
+//左侧工具栏悬停动画有点问题
 //我发现所有的自定义按钮都是点了之后有点问题 都要改
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -153,6 +158,7 @@ void MainWindow::on_toolButton_3_pressed()
 {
     QUrl filename1=QFileDialog::getExistingDirectory(this,"请选择一个文件夹");
     curfile = filename1.toString();
+    if(curfile!="")ui->treeWidget->clear();
     QTreeWidgetItem * rootitem=new QTreeWidgetItem(QStringList()<<"");
     ui->treeWidget->addTopLevelItem(rootitem);
     if(curfile.isEmpty())return;
@@ -241,38 +247,43 @@ void MainWindow::on_toolButton_2_pressed()
 {
     // 获取当前选中项
     QTreeWidgetItem *selectedItem = ui->treeWidget->currentItem();
-    QString parentPath = curfile+myFileManager().getItemPath(selectedItem);
-
-    // 如果是文件则取其所在目录
-    if(!QFileInfo(parentPath).isDir()) {
-        parentPath = QFileInfo(parentPath).path();
+    if (!selectedItem) {
+        // 没有选中项，添加到根目录
+        myFileManager().NewFile(curfile, "newitem");
+        QTreeWidgetItem *newItem = new QTreeWidgetItem(QStringList() << "newitem");
+        newItem->setFlags(newItem->flags() | Qt::ItemIsEditable);
+        ui->treeWidget->addTopLevelItem(newItem);
+        return;
     }
-    myFileManager().NewFile(parentPath, "newitem");
+    // 获取选中项对应的完整路径
+    QString itemPath = curfile + myFileManager().getItemPath(selectedItem);
+    QFileInfo info(itemPath);
+    QString targetDir;
+    if (info.isDir()) {
+        // 如果是目录，直接在该目录下创建新文件
+        targetDir = itemPath;
+    } else {
+        // 如果是文件，取其所在目录
+        targetDir = info.path();
+    }
+    // 创建新文件
+    myFileManager().NewFile(targetDir, "newitem");
+    // 创建新节点
     QTreeWidgetItem *newItem = new QTreeWidgetItem(QStringList() << "newitem");
     newItem->setFlags(newItem->flags() | Qt::ItemIsEditable);
-
-    // 添加到正确位置
-    if(selectedItem && selectedItem->isSelected()) {
-        // 如果选中的是目录，添加到子节点
-        if(QFileInfo(parentPath).isDir()) {
-            selectedItem->addChild(newItem);
-            selectedItem->setExpanded(true); // 自动展开
-        }
-        // 如果选中的是文件，添加到同级
-        else {
-            if(selectedItem->parent()) {
-                selectedItem->parent()->addChild(newItem);
-            } else {
-                ui->treeWidget->addTopLevelItem(newItem);
-            }
-        }
+    // 添加节点
+    if (info.isDir()) {
+        // 选中的是目录，添加为子节点
+        selectedItem->addChild(newItem);
+        selectedItem->setExpanded(true);
     } else {
-        // 没有选中项时添加到根目录
-        ui->treeWidget->addTopLevelItem(newItem);
+        // 选中的是文件，添加为同级节点
+        if (selectedItem->parent()) {
+            selectedItem->parent()->addChild(newItem);
+        } else {
+            ui->treeWidget->addTopLevelItem(newItem);
+        }
     }
-
-    // 立即进入编辑状态
-    ui->treeWidget->editItem(newItem, 0);
 }
 
 
@@ -289,11 +300,10 @@ void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)
 
 
 void MainWindow::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
-{
-    // QString cleanPath = QDir::cleanPath(a);
-    // QUrl url = QUrl::fromLocalFile(cleanPath);
-    // QUrl a=curfile+(myFileManager().getItemPath(item)).toString();
-    //QDesktopServices::openUrl(url);
+{//打开文件还有问题
+    ui->stackedWidget->setCurrentWidget(ui->html);
+    orifile=curfile+"/"+myFileManager().getItemPath(item);
+    myFileManager().LoadFile(orifile,ui->textEdit_100);
 }
 
 
@@ -390,7 +400,7 @@ void MainWindow::on_toolButton_105_pressed()
 
 void MainWindow::on_toolButton_107_pressed()
 {
-    curfile="";
+    on_toolButton_2_pressed();
     ui->stackedWidget->setCurrentWidget(ui->html);
 }
 
@@ -404,17 +414,44 @@ void MainWindow::on_toolButton_110_pressed()
 
 void MainWindow::on_toolButton_157_pressed()
 {
-    //搜索有点问题
-    //myFileManager().findAndHighlight(ui->treeWidget->topLevelItem(0),ui->lineEdit->text(),false);
+    myFileManager().clearHighlights(ui->treeWidget);
+    myFileManager().findAndHighlight(ui->treeWidget->topLevelItem(0),ui->lineEdit->text(),false);
 }
 
 
 void MainWindow::on_toolButton_109_pressed()
 {
     QString outputfile=QFileDialog::getOpenFileName(this,"请选择导出地址","");
-
+    // 获取保存路径并自动添加.pdf扩展名
+    QString outputFile = QFileDialog::getSaveFileName(
+        this,
+        "导出为PDF",
+        QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
+        "PDF Files (*.pdf)"
+        );
+    if (outputFile.isEmpty()) return;
+    if (!outputFile.endsWith(".pdf", Qt::CaseInsensitive)) {
+        outputFile += ".pdf";
+    }
+    // 创建PDF打印机配置
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(outputFile);
+    printer.setPageSize(QPageSize(QPageSize::A4));
+    printer.setPageOrientation(QPageLayout::Portrait);
+    printer.setPageMargins(QMarginsF(15, 15, 15, 15), QPageLayout::Millimeter);
+    QTextDocument document;
+    QString htmlContent = ui->textEdit_100->toHtml();
+    document.setHtml(myFileManager().adaptHtmlForQt(htmlContent));
+    document.setPageSize(printer.pageRect(QPrinter::Millimeter).size());
+    document.print(&printer);
+    QMessageBox::information(this, "导出成功", "文件已保存至：" + outputFile);
 }
 
+void MainWindow::on_toolButton_115_pressed()
+{
+
+}
 
 void MainWindow::on_toolButton_5_pressed()
 {
@@ -594,7 +631,7 @@ void MainWindow::on_toolButton_145_pressed()
 
 void MainWindow::on_toolButton_146_pressed()
 {
-     on_toolButton_106_pressed();
+    on_toolButton_106_pressed();
 }
 
 
@@ -631,13 +668,32 @@ void MainWindow::on_toolButton_200_pressed()
 void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
     orifile=curfile+"/"+myFileManager().getItemPath(item);
-    qDebug()<<orifile;
+    item->setData(0, Qt::UserRole, orifile);
 }
 
 
 
 void MainWindow::on_treeWidget_itemChanged(QTreeWidgetItem *item, int column)
 {
-    myFileManager().renameFile(orifile,item->text(0));
+    qDebug()<<item->text(0);
+    // 获取存储的原始路径
+    QString oldPath = item->data(0, Qt::UserRole).toString();
+    qDebug()<<oldPath;
+    // 防止空路径或错误触发
+    if (oldPath.isEmpty()) return;
+    // 获取新名称
+    QString newName = item->text(0);
+    // 执行重命名
+    bool success = myFileManager().renameFile(oldPath, newName);
+    if (success) {
+        // 更新路径存储（可选）
+        QFileInfo newInfo(oldPath);
+        newInfo.setFile(newInfo.dir(), newName);
+        item->setData(0, Qt::UserRole, newInfo.absoluteFilePath());
+    } else {
+        // 恢复原名（避免显示错误名称）
+        QSignalBlocker blocker(ui->treeWidget); // 阻塞信号
+        item->setText(0, QFileInfo(oldPath).fileName());
+    }
 }
 

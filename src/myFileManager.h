@@ -22,8 +22,9 @@ public:
     void EditFile(QString,QTextEdit*);
     QTreeWidgetItem* findAndHighlight(QTreeWidgetItem *item, const QString &keyword, bool firstMatchFound);
     void clearHighlights(QTreeWidget *treeWidget);
-    void renameFile(const QString , const QString );
+    bool renameFile(const QString &oldPath, const QString &newName);
     QString getItemPath(QTreeWidgetItem* item);
+    QString adaptHtmlForQt(const QString &originalHtml);
 
 //ui传不过来
 };
