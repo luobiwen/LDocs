@@ -10,10 +10,11 @@
 #include<QGraphicsColorizeEffect>
 #include<QDesktopServices>
 #include<QStandardPaths>
-#include<Qprinter>
-#include <QPrintDialog>
-#include <QPageSetupDialog>
 #include <QPageSize>
+#include <QPdfWriter>
+#include <QPainter>
+#include <QFont>
+#include<QFontDatabase>
 //左侧工具栏悬停动画有点问题
 //我发现所有的自定义按钮都是点了之后有点问题 都要改
 MainWindow::MainWindow(QWidget *parent)
@@ -22,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     dsmanager = new myDSManager();
     dsmanager->sendRequest("你好");
-    ui->setupUi(this);
+    ui->setupUi(this);//ui初始化
     ui->stackedWidget->setCurrentWidget(ui->start);
     installEventFiltersToAllWidgets();
     this->setWindowFlags(Qt::FramelessWindowHint);
@@ -44,10 +45,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->treeWidget->setHeaderHidden(true);  // 隐藏表头
     curfile="";
     ui->lineEdit_2->setReadOnly(true);
-}
-//设置图片动画
-void MainWindow::setimagecartoon(QToolButton* button){
-
+    ui->treeWidget->header()->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+    ui->treeWidget->header()->setSectionResizeMode(0, QHeaderView::ResizeMode::ResizeToContents);
+    ui->treeWidget->header()->setStretchLastSection(false);
+    ui->treeWidget->setAutoScroll(true);
+    orifile="";
+    isModified = false;
 }
 
 //设置图片滤镜
@@ -77,7 +80,7 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event) {
     if(watched == ui->toolButton_106){//106第一次press了之后背景颜色不能变回来
         filterButtonIconColor(qobject_cast<QToolButton*>(watched),QColor(Qt::white),QColor(0, 170, 255),event);
     }
-    if(watched == ui->toolButton_7||watched == ui->toolButton_8||watched == ui->toolButton_6){
+    if(watched == ui->toolButton_7||watched == ui->toolButton_200||watched == ui->toolButton_6){
         if (event->type() == QEvent::Enter) {
             setbackgroundimageeffect(qobject_cast<QToolButton*>(watched),QColor(0, 170, 255),0.7);
             return true;
@@ -120,7 +123,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_toolButton_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(ui->readme);
+    ui->stackedWidget->setCurrentWidget(ui->statistics);
 }
 
 
@@ -132,7 +135,7 @@ void MainWindow::on_toolButton_12_clicked()
 
 void MainWindow::on_toolButton_101_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(ui->issue);
+    ui->stackedWidget->setCurrentWidget(ui->html);
 }
 
 
@@ -144,7 +147,7 @@ void MainWindow::on_toolButton_102_clicked()
 
 void MainWindow::on_toolButton_103_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(ui->date);
+    ui->stackedWidget->setCurrentWidget(ui->notification);
 }
 
 
@@ -286,24 +289,86 @@ void MainWindow::on_toolButton_2_pressed()
     }
 }
 
-
+// 文本变化时只标记修改状态，不保存
 void MainWindow::on_textEdit_100_textChanged()
 {
-    filemanager->EditFile(curfile,ui->textEdit_100);
+    // 标记文件已被修改
+    isModified = true;
 }
-
-
-void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)
-{
-    //filemanager->EditFileName(curfile,ui->lineEdit_2);
-}
-
 
 void MainWindow::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
-{//打开文件还有问题
+{
     ui->stackedWidget->setCurrentWidget(ui->html);
-    orifile=curfile+"/"+myFileManager().getItemPath(item);
-    myFileManager().LoadFile(orifile,ui->textEdit_100);
+    QString fileName = item->text(0);
+    // 删除文件后缀（最后一个点之后的部分）
+    int dotIndex = fileName.lastIndexOf('.');
+    if (dotIndex != -1) {
+        fileName = fileName.left(dotIndex);
+    }
+    ui->lineEdit_2->setText(fileName);
+    QString newOrifile = curfile + myFileManager().getItemPath(item);
+    QFileInfo fileInfo(newOrifile);
+    // 检查当前文件是否有未保存的修改
+    if(isModified && !orifile.isEmpty() && QFileInfo(orifile).isFile()) {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "未保存的更改",
+                                      "当前文件有未保存的更改。是否保存？",
+                                      QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+
+        if(reply == QMessageBox::Save) {
+            saveCurrentFile();
+        } else if(reply == QMessageBox::Cancel) {
+            return;
+        }
+    }
+    if(fileInfo.isFile()) {
+        // 处理文件
+        if(orifile != newOrifile) {
+            QSignalBlocker blocker(ui->textEdit_100);
+            orifile = newOrifile;
+            myFileManager().LoadFile(orifile, ui->textEdit_100);
+            isModified = false;
+        }
+    } else if(fileInfo.isDir()) {
+        // 处理目录
+        orifile = ""; // 清除当前文件路径
+        isModified = false;
+    } else {
+        ui->textEdit_100->setHtml("<pre>错误: 路径无效或不存在</pre>");
+        orifile = "";
+        isModified = false;
+    }
+}
+
+void MainWindow::saveCurrentFile()
+{
+    if(orifile.isEmpty()) {
+        QMessageBox::warning(this, "保存失败", "没有打开的文件");
+        return;
+    }
+    QFileInfo fileInfo(orifile);
+    if(!fileInfo.isFile()) {
+        QMessageBox::warning(this, "保存失败", "当前项目不是文件: " + orifile);
+        return;
+    }
+    filemanager->EditFile(orifile, ui->textEdit_100);
+    // 重置修改状态
+    isModified = false;
+    // 显示保存成功提示
+    QMessageBox::information(this, "保存成功", "文件已保存: " + orifile);
+}
+
+// 键盘事件处理 - 捕获 Ctrl+S
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    // 检查是否按下 Ctrl+S
+    if ((event->modifiers() & Qt::ControlModifier) && (event->key() == Qt::Key_S)) {
+        saveCurrentFile();
+        event->accept(); // 标记事件已处理
+        return;
+    }
+    // 调用基类处理其他按键
+    QMainWindow::keyPressEvent(event);
 }
 
 
@@ -421,31 +486,134 @@ void MainWindow::on_toolButton_157_pressed()
 
 void MainWindow::on_toolButton_109_pressed()
 {
-    QString outputfile=QFileDialog::getOpenFileName(this,"请选择导出地址","");
-    // 获取保存路径并自动添加.pdf扩展名
-    QString outputFile = QFileDialog::getSaveFileName(
+    // 获取保存路径 - 使用更可靠的方法
+    QString defaultDir = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    QString defaultName = ui->lineEdit_2->text().trimmed().isEmpty() ?
+                              "未命名文档" : ui->lineEdit_2->text().trimmed();
+    QString filePath = QFileDialog::getSaveFileName(
         this,
-        "导出为PDF",
-        QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
-        "PDF Files (*.pdf)"
+        "导出PDF",
+        defaultDir + "/" + defaultName + ".pdf",
+        "PDF文件 (*.pdf)"
         );
-    if (outputFile.isEmpty()) return;
-    if (!outputFile.endsWith(".pdf", Qt::CaseInsensitive)) {
-        outputFile += ".pdf";
+    if (filePath.isEmpty()) return;
+    // 确保文件扩展名正确
+    if (!filePath.endsWith(".pdf", Qt::CaseInsensitive)) {
+        filePath += ".pdf";
     }
-    // 创建PDF打印机配置
-    QPrinter printer(QPrinter::HighResolution);
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setOutputFileName(outputFile);
-    printer.setPageSize(QPageSize(QPageSize::A4));
-    printer.setPageOrientation(QPageLayout::Portrait);
-    printer.setPageMargins(QMarginsF(15, 15, 15, 15), QPageLayout::Millimeter);
-    QTextDocument document;
-    QString htmlContent = ui->textEdit_100->toHtml();
-    document.setHtml(myFileManager().adaptHtmlForQt(htmlContent));
-    document.setPageSize(printer.pageRect(QPrinter::Millimeter).size());
-    document.print(&printer);
-    QMessageBox::information(this, "导出成功", "文件已保存至：" + outputFile);
+    // 检查文件路径是否有效
+    QFileInfo fileInfo(filePath);
+    QDir dir = fileInfo.absoluteDir();
+    // 检查目录是否存在
+    if (!dir.exists()) {
+        QMessageBox::critical(this, "错误", "目录不存在: " + dir.absolutePath());
+        return;
+    }
+    // 检查目录是否可写
+    if (!dir.isReadable()) {
+        QMessageBox::critical(this, "错误", "目录不可读: " + dir.absolutePath());
+        return;
+    }
+    // 尝试创建临时文件测试写权限
+    QString testFilePath = filePath + ".test";
+    QFile testFile(testFilePath);
+    if (!testFile.open(QIODevice::WriteOnly)) {
+        QMessageBox::critical(this, "错误",
+                              QString("无法写入文件: %1\n错误: %2")
+                                  .arg(testFilePath)
+                                  .arg(testFile.errorString()));
+        return;
+    }
+    testFile.write("test");
+    testFile.close();
+    QFile::remove(testFilePath);
+    // 创建PDF写入器
+    QPdfWriter pdfWriter(filePath);
+    // 设置PDF版本（兼容性）
+    pdfWriter.setPdfVersion(QPagedPaintDevice::PdfVersion_1_6);
+    // 设置页面属性
+    pdfWriter.setPageSize(QPageSize(QPageSize::A4));
+    pdfWriter.setPageMargins(QMarginsF(30, 30, 30, 30)); // 单位是点(1/72英寸)
+    // 设置标题和创建者信息
+    QString title = ui->lineEdit_2->text().trimmed();
+    if (title.isEmpty()) {
+        title = "未命名文档";
+    }
+    pdfWriter.setTitle(title);
+    pdfWriter.setCreator("luobiwen PDF导出工具");
+    // 创建绘图器 - 使用更安全的方式
+    QPainter painter;
+    if (!painter.begin(&pdfWriter)) {
+        QString errorMsg = "无法初始化PDF绘制器\n";
+        errorMsg += "可能原因:\n";
+        errorMsg += "- 文件路径无效或不可写\n";
+        errorMsg += "- 系统权限问题\n";
+        errorMsg += "- Qt PDF模块配置错误\n";
+        errorMsg += "路径: " + filePath;
+
+        QMessageBox::critical(this, "错误", errorMsg);
+        return;
+    }
+    qDebug() << "成功初始化PDF绘制器";
+    // 获取页面尺寸
+    const int pageWidth = pdfWriter.width();
+    const int pageHeight = pdfWriter.height();
+    qDebug() << "页面尺寸:" << pageWidth << "x" << pageHeight;
+    // 使用默认字体避免问题
+    QFont defaultFont = QApplication::font();
+    // 设置标题字体
+    QFont titleFont = defaultFont;
+    titleFont.setPointSize(20);
+    titleFont.setBold(true);
+    painter.setFont(titleFont);
+    // 绘制标题
+    painter.setPen(Qt::black);
+    painter.drawText(0, 50, title);
+    // 准备内容
+    QString content = ui->textEdit_100->toPlainText();
+    if (content.isEmpty()) {
+        content = "（无内容）";
+    }
+    qDebug() << "内容长度:" << content.length();
+    // 设置内容字体
+    QFont contentFont = defaultFont;
+    contentFont.setPointSize(150);
+    painter.setFont(contentFont);
+    // 创建QTextDocument处理文本布局
+    QTextDocument textDoc;
+    textDoc.setDefaultFont(contentFont);
+    textDoc.setPlainText(content);
+    // 设置文本区域
+    int topMargin = 80; // 标题区域高度
+    QRect contentRect(50, topMargin, pageWidth - 100, pageHeight - topMargin);
+    qDebug() << "内容区域:" << contentRect;
+    // 绘制文本背景
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(255, 255, 255));
+    painter.drawRect(contentRect);
+    painter.setPen(Qt::black);
+    // 绘制文本
+    textDoc.setTextWidth(contentRect.width());
+    painter.save();
+    painter.translate(contentRect.topLeft());
+    // 实际绘制文本
+    painter.setPen(Qt::black);
+    textDoc.drawContents(&painter);
+    painter.restore();
+    // 结束绘制
+    painter.end();
+    qDebug() << "PDF文件创建成功:" << filePath;
+    // 检查文件是否创建成功
+    if (QFileInfo::exists(filePath) && QFileInfo(filePath).size() > 0) {
+        // 尝试打开PDF
+        if (QDesktopServices::openUrl(QUrl::fromLocalFile(filePath))) {
+            QMessageBox::information(this, "导出成功", "PDF文件已成功导出并打开:\n" + filePath);
+        } else {
+            QMessageBox::information(this, "导出成功", "PDF文件已成功导出:\n" + filePath);
+        }
+    } else {
+        QMessageBox::critical(this, "错误", "PDF文件创建失败，请检查路径和权限");
+    }
 }
 
 void MainWindow::on_toolButton_115_pressed()
@@ -524,7 +692,7 @@ void MainWindow::on_toolButton_113_pressed()
 
 void MainWindow::on_toolButton_130_pressed()
 {
-
+    on_toolButton_109_pressed();
 }
 
 

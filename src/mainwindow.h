@@ -55,13 +55,10 @@ private slots:
     void setbackgroundimageeffect(QToolButton* button, const QColor& color,double r);
 
     void on_toolButton_7_pressed();
-    void setimagecartoon(QToolButton* button);
 
     void on_toolButton_2_pressed();
 
     void on_textEdit_100_textChanged();
-
-    void on_lineEdit_2_textChanged(const QString &arg1);
 
     void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
 
@@ -161,6 +158,9 @@ private slots:
     void on_treeWidget_itemChanged(QTreeWidgetItem *item, int column);
 
     void on_toolButton_115_pressed();
+    // 重写键盘事件处理函数
+    void keyPressEvent(QKeyEvent *event) override;
+    void saveCurrentFile();
 
 private:
     Ui::MainWindow *ui;
@@ -173,5 +173,7 @@ private:
     QString orifile;
     bool showLineNumbers;
     QTextEdit *curtextedit;
+    QString lastSavedContent;
+    bool isModified;
 };
 #endif // MAINWINDOW_H

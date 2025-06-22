@@ -11,7 +11,10 @@
 #include <QRegularExpression>
 #include <QMainWindow>
 #include<QMessageBox>
-
+#include <QPdfWriter>
+#include <QPainter>
+#include <QFont>
+#include<QSaveFile>
 class myFileManager{
 public:
     QJsonObject loadConfig(const QString &path);

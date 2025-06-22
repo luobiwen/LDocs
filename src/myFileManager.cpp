@@ -49,27 +49,65 @@ void myFileManager::NewFolder(QString filepath){
     QDir().mkdir(filepath);
 }
 
-void myFileManager::LoadFile(QString filepath,QTextEdit* textedit){//loadfile还有问题
+void myFileManager::LoadFile(QString filepath,QTextEdit* textedit){
     if(filepath.isEmpty())return;
     QFile file(filepath);
+    // 检查文件大小（限制为 2MB）
+    QFileInfo fileInfo(filepath);
+    if (fileInfo.size() > 2 * 1024 * 1024) { // 2MB
+        textedit->setHtml("<pre style='color:red;'>文件过大，无法预览 (超过2MB)</pre>");
+        return;
+    }
     if (file.open(QIODevice::ReadOnly|QIODevice::WriteOnly | QIODevice::Text)) {
         QByteArray array=file.readAll();
         textedit->setPlainText(QString(array));
         file.close();
     }
-    else textedit->setPlainText("无法打开文件");
+    else textedit->setHtml("<pre>无法打开文件</pre>");
     return;
 }
 
-void myFileManager::EditFile(QString filepath,QTextEdit* textedit){
-    if(filepath.isEmpty())return;
-    QFile file(filepath);
-    if (file.open(QIODevice::ReadOnly|QIODevice::WriteOnly | QIODevice::Text)) {
-        QByteArray array=textedit->toPlainText().toUtf8();
-        file.write(array);
-        file.close();
+void myFileManager::EditFile(QString filepath, QTextEdit* textedit)
+{
+    if(filepath.isEmpty()) {
+        textedit->setHtml("<pre>错误: 文件路径为空</pre>");
+        return;
     }
-    else textedit->setPlainText("无法编辑文件");
+
+    QFileInfo fileInfo(filepath);
+
+    // 检查是否是文件
+    if(fileInfo.isDir()) {
+        textedit->setHtml("<pre>错误: 路径指向目录而非文件</pre>");
+        return;
+    }
+
+    // 检查文件是否可写
+    if(!fileInfo.isWritable()) {
+        textedit->setHtml(QString("<pre>错误: 文件不可写<br>路径: %1<br>权限: %2</pre>")
+                              .arg(filepath)
+                              .arg(fileInfo.permissions()));
+        return;
+    }
+
+    // 使用 QSaveFile 进行安全的文件写入
+    QSaveFile file(filepath);
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QByteArray array = textedit->toPlainText().toUtf8();
+        file.write(array);
+
+        if(file.commit()) {
+            // 成功时不修改文本编辑框内容
+        } else {
+            textedit->setHtml(QString("<pre>保存失败: %1<br>错误码: %2</pre>")
+                                  .arg(file.errorString())
+                                  .arg(file.error()));
+        }
+    } else {
+        textedit->setHtml(QString("<pre>无法打开文件: %1<br>错误码: %2</pre>")
+                              .arg(file.errorString())
+                              .arg(file.error()));
+    }
 }
 
 void myFileManager::clearHighlights(QTreeWidget *treeWidget)
