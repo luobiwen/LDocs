@@ -4,6 +4,8 @@
 #include"myDSManager.h"
 #include"myHelpDialog.h"
 #include"myAboutDialog.h"
+#include"mycharts.h"
+#include"mysetting.h"
 #include<QFileDialog>
 #include<QMouseEvent>
 #include<QPropertyAnimation>
@@ -51,6 +53,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->treeWidget->setAutoScroll(true);
     orifile="";
     isModified = false;
+    mycharts *mychartpage = new mycharts;
+    ui->stackedWidget->insertWidget(0,mychartpage);
+    GitHubSettingsUI *mysettingpage = new GitHubSettingsUI;
+    ui->stackedWidget->insertWidget(1,mysettingpage);
 }
 
 //设置图片滤镜
@@ -123,7 +129,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_toolButton_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(ui->statistics);
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 
@@ -153,7 +159,7 @@ void MainWindow::on_toolButton_103_clicked()
 
 void MainWindow::on_toolButton_132_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(ui->help);
+    ui->stackedWidget->setCurrentIndex(1);
 }
 
 
@@ -636,9 +642,9 @@ void MainWindow::onResponseReceived(const QString &text) {
 
 void MainWindow::on_toolButton_4_pressed()
 {
-    QString prompt=ui->textEdit_6->toPlainText();
+    QString prompt=ui->textEdit_7->toPlainText();
     dsmanager->sendRequest(prompt);
-    curtextedit = ui->textEdit_5;
+    curtextedit = ui->textEdit_100;
     connect(dsmanager, &myDSManager::responseReceived,
             this, &MainWindow::onResponseReceived);
 }
